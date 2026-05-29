@@ -73,7 +73,7 @@ export default function PlaylistPage() {
       duration: "3:12",
       reason: "This amazing Filipino song reminds me of the golden moments we share together, my cutie ganda. Your smile lights up my world just like this melody.",
       spotify_url: "https://open.spotify.com/track/2ADSh3Mp744n2586tpUtIW",
-      preview_url: "https://p.scdn.co/mp3-preview/6c6207cea32368c94e5ca1bbec7f86aeff1d3846?cid=3f398ac31e9548e993b18b641d8667e0",
+      preview_url: null,
       gradient: "from-yellow-400 to-orange-500",
       mood: "Uplifting"
     },
@@ -85,7 +85,7 @@ export default function PlaylistPage() {
       duration: "2:36",
       reason: "This song captures how I feel when I'm with you - completely lost in happiness. You make me feel like I'm floating on air.",
       spotify_url: "https://open.spotify.com/track/3T03rPwlL8NVk1yIaxeD8U",
-      preview_url: "https://p.scdn.co/mp3-preview/84a0f4fc43b14b81b0a4c37e9d8fbc3fc5b6a90b?cid=3f398ac31e9548e993b18b641d8667e0",
+      preview_url: null,
       gradient: "from-purple-400 to-pink-500",
       mood: "Romantic"
     },
@@ -97,7 +97,7 @@ export default function PlaylistPage() {
       duration: "4:12",
       reason: "Every time I hear this song, I imagine us dancing together. It perfectly describes how I want to spend every moment with you.",
       spotify_url: "https://open.spotify.com/track/5Lgcn7u07bHuqbOtXkN62u",
-      preview_url: "https://p.scdn.co/mp3-preview/cd33a11a2a045dcb58969e49e9b976ed30c1bad8?cid=3f398ac31e9548e993b18b641d8667e0",
+      preview_url: null,
       gradient: "from-blue-400 to-indigo-500",
       mood: "Romantic"
     },
