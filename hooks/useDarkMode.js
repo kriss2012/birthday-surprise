@@ -4,18 +4,21 @@ import { createContext, useContext, useEffect, useState } from 'react'
 const DarkModeContext = createContext()
 
 export function DarkModeProvider({ children }) {
-  // Read preference synchronously on first render — no loading flash.
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    if (typeof window === 'undefined') return false
+  const [isDarkMode, setIsDarkMode] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
     try {
       const saved = localStorage.getItem('darkMode')
-      return saved === 'true'
+      if (saved === 'true') {
+        setIsDarkMode(true)
+      }
     } catch {
-      return false
+      // ignore
     }
-  })
+    setIsLoading(false)
+  }, [])
 
-  // Apply the class immediately after paint (no "isLoading" gate needed).
   useEffect(() => {
     if (typeof document === 'undefined') return
     if (isDarkMode) {
@@ -38,7 +41,7 @@ export function DarkModeProvider({ children }) {
   const toggleDarkMode = () => setIsDarkMode(prev => !prev)
 
   return (
-    <DarkModeContext.Provider value={{ isDarkMode, toggleDarkMode, isLoading: false }}>
+    <DarkModeContext.Provider value={{ isDarkMode, toggleDarkMode, isLoading }}>
       {children}
     </DarkModeContext.Provider>
   )
