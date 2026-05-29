@@ -22,9 +22,10 @@ export default function MemoriesPage() {
   const { isAuthenticated } = useAuth()
 
   const getDefaultMemories = () => [
-    { id: '1', title: 'Our First Date', description: 'The day everything changed. Coffee, laughter, and the beginning of our beautiful story.', photo_url: null, date_taken: '2024-03-09', order_index: 1 },
-    { id: '2', title: 'Sunset at the Beach', description: 'Walking hand in hand as the sun painted the sky in our favorite colors.', photo_url: null, date_taken: '2024-04-15', order_index: 2 },
-    { id: '3', title: 'Cooking Together', description: 'Making a mess in the kitchen but creating perfect memories.', photo_url: null, date_taken: '2024-05-20', order_index: 3 }
+    { id: '1', title: 'Our First Date', description: 'The day everything changed. Coffee, laughter, and the beginning of our beautiful story.', photo_url: 'https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?auto=format&fit=crop&w=800&q=80', date_taken: '2024-03-09', order_index: 1 },
+    { id: '2', title: 'Sunset at the Beach', description: 'Walking hand in hand as the sun painted the sky in our favorite colors.', photo_url: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80', date_taken: '2024-04-15', order_index: 2 },
+    { id: '3', title: 'Cooking Together', description: 'Making a mess in the kitchen but creating perfect memories.', photo_url: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=800&q=80', date_taken: '2024-05-20', order_index: 3 },
+    { id: '4', title: 'Starlit Picnic', description: 'A quiet evening under the stars, just you, me, and endless conversations.', photo_url: 'https://images.unsplash.com/photo-1499540633125-484965b60031?auto=format&fit=crop&w=800&q=80', date_taken: '2024-06-12', order_index: 4 }
   ]
 
   const fetchMemories = useCallback(async () => {
