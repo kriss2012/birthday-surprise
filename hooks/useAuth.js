@@ -11,16 +11,16 @@ import { useRouter } from 'next/navigation'
 export function useAuth() {
   const router = useRouter()
 
-  // Read auth state synchronously on first render (no async delay).
-  // sessionStorage is always available on the client, so we can safely
-  // initialise state directly without waiting for a useEffect.
-  const [isAuthenticated] = useState(() => {
-    if (typeof window === 'undefined') return false
-    return sessionStorage.getItem('birthday_authenticated') === 'true'
-  })
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
-  // No longer "loading" — we know the answer immediately.
-  const [isLoading] = useState(false)
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const auth = sessionStorage.getItem('birthday_authenticated') === 'true'
+      setIsAuthenticated(auth)
+      setIsLoading(false)
+    }
+  }, [])
 
   // Redirect unauthenticated users once on mount (no repeated calls).
   const redirected = useRef(false)
