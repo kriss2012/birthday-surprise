@@ -1,0 +1,640 @@
+@import "tailwindcss";
+
+/* Dark mode CSS variables */
+:root {
+  --scroll-bg: #f1f1f1;
+  --scroll-thumb: linear-gradient(to bottom, #ec4899, #a855f7);
+  --scroll-thumb-hover: linear-gradient(to bottom, #d946aa, #9333ea);
+}
+
+.dark {
+  --scroll-bg: #1f2937;
+  --scroll-thumb: linear-gradient(to bottom, #ec4899, #a855f7);
+  --scroll-thumb-hover: linear-gradient(to bottom, #d946aa, #9333ea);
+}
+
+/* Custom global styles */
+/* More specific reset to avoid conflicting with Tailwind */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar with dark mode support */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scroll-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scroll-thumb);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scroll-thumb-hover);
+}
+
+/* Selection color */
+::selection {
+  background: rgba(168, 85, 247, 0.3);
+  color: inherit;
+}
+
+/* Missing animations */
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-up-smooth {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateY(10px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px) scale(1);
+  }
+}
+
+@keyframes gentle-glow {
+  0%, 100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes gentle-pulse {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Utility classes */
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.8s ease-out;
+}
+
+.animate-slide-up-smooth {
+  animation: slide-up-smooth 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation-fill-mode: both;
+}
+
+.animate-gentle-glow {
+  animation: gentle-glow 3s ease-in-out infinite;
+}
+
+.animate-gentle-pulse {
+  animation: gentle-pulse 3s ease-in-out infinite;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.4s ease-out;
+}
+
+/* Landing page animations */
+@keyframes float-slow {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg); 
+    opacity: 0.7;
+  }
+  33% {
+    transform: translateY(-15px) rotate(5deg);
+    opacity: 0.9;
+  }
+  66% {
+    transform: translateY(-8px) rotate(-3deg);
+    opacity: 0.8;
+  }
+}
+
+@keyframes float-medium {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg); 
+    opacity: 0.6;
+  }
+  50% { 
+    transform: translateY(-15px) rotate(-10deg); 
+    opacity: 0.8;
+  }
+}
+
+@keyframes float-fast {
+  0%, 100% { 
+    transform: translateY(0px); 
+    opacity: 0.5;
+  }
+  50% { 
+    transform: translateY(-10px); 
+    opacity: 0.7;
+  }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-float-slow { 
+  animation: float-slow 8s ease-in-out infinite; 
+  will-change: transform, opacity;
+}
+.animate-float-medium { 
+  animation: float-medium 6s ease-in-out infinite; 
+  will-change: transform, opacity;
+}
+.animate-float-fast { 
+  animation: float-fast 4s ease-in-out infinite; 
+  will-change: transform, opacity;
+}
+.animate-shake { animation: shake 0.3s ease-in-out; }
+.animate-spin-slow { animation: spin-slow 8s linear infinite; }
+
+/* Responsive utilities for better mobile experience */
+.safe-area-inset {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+.mobile-container {
+  @apply px-4 sm:px-6 lg:px-8;
+}
+
+.mobile-text-center {
+  text-align: center;
+}
+
+/* Better touch targets for mobile */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Improved mobile spacing */
+.mobile-spacing {
+  @apply py-4 sm:py-6 lg:py-8;
+}
+
+.mobile-gap {
+  @apply gap-4 sm:gap-6 lg:gap-8;
+}
+
+/* Explicit centering utilities */
+.center-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.center-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .center-content {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 0.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .center-content {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top:1rem;
+  }
+}
+
+/* Ensure Tailwind padding classes work properly */
+.p-4 { padding: 1rem !important; }
+.p-6 { padding: 1.5rem !important; }
+.p-8 { padding: 2rem !important; }
+.p-10 { padding: 2.5rem !important; }
+.p-12 { padding: 3rem !important; }
+
+.px-4 { padding-left: 1rem !important; padding-right: 1rem !important; }
+.px-5 { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
+.px-6 { padding-left: 1.5rem !important; padding-right: 1.5rem !important; }
+.px-8 { padding-left: 2rem !important; padding-right: 2rem !important; }
+.px-10 { padding-left: 2.5rem !important; padding-right: 2.5rem !important; }
+
+.py-3 { padding-top: 0.75rem !important; padding-bottom: 0.75rem !important; }
+.py-4 { padding-top: 1rem !important; padding-bottom: 1rem !important; }
+.py-5 { padding-top: 1.25rem !important; padding-bottom: 1.25rem !important; }
+.py-6 { padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
+.py-8 { padding-top: 2rem !important; padding-bottom: 2rem !important; }
+
+/* Responsive padding overrides */
+@media (min-width: 640px) {
+  .sm\:p-6 { padding: 1.5rem !important; }
+  .sm\:p-7 { padding: 1.75rem !important; }
+  .sm\:p-8 { padding: 2rem !important; }
+  .sm\:p-10 { padding: 2.5rem !important; }
+  .sm\:px-0 { padding-left: 0 !important; padding-right: 0 !important; }
+  .sm\:px-6 { padding-left: 1.5rem !important; padding-right: 1.5rem !important; }
+  .sm\:py-8 { padding-top: 2rem !important; padding-bottom: 2rem !important; }
+}
+
+@media (min-width: 768px) {
+  .md\:p-6 { padding: 1.5rem !important; }
+  .md\:p-8 { padding: 2rem !important; }
+  .md\:p-12 { padding: 3rem !important; }
+  .md\:px-8 { padding-left: 2rem !important; padding-right: 2rem !important; }
+}
+
+/* Margin utilities */
+.mb-8 { margin-bottom: 2rem !important; }
+.mb-10 { margin-bottom: 2.5rem !important; }
+.mb-12 { margin-bottom: 3rem !important; }
+.mb-16 { margin-bottom: 4rem !important; }
+.mb-20 { margin-bottom: 5rem !important; }
+
+.mt-8 { margin-top: 2rem !important; }
+.mt-12 { margin-top: 3rem !important; }
+.mt-16 { margin-top: 4rem !important; }
+
+.my-8 { margin-top: 2rem !important; margin-bottom: 2rem !important; }
+.my-12 { margin-top: 3rem !important; margin-bottom: 3rem !important; }
+
+.mr-3 { margin-right: 0.75rem !important; }
+.mr-4 { margin-right: 1rem !important; }
+.mr-5 { margin-right: 1.25rem !important; }
+.mr-6 { margin-right: 1.5rem !important; }
+
+.ml-3 { margin-left: 0.75rem !important; }
+.ml-4 { margin-left: 1rem !important; }
+.ml-5 { margin-left: 1.25rem !important; }
+.ml-6 { margin-left: 1.5rem !important; }
+
+/* Important: Override global reset with higher specificity */
+div.mb-2, p.mb-2, h1.mb-2, h2.mb-2, h3.mb-2, span.mb-2, section.mb-2, article.mb-2, main.mb-2 { margin-bottom: 0.5rem !important; }
+div.mb-3, p.mb-3, h1.mb-3, h2.mb-3, h3.mb-3, span.mb-3, section.mb-3, article.mb-3, main.mb-3 { margin-bottom: 0.75rem !important; }
+div.mb-4, p.mb-4, h1.mb-4, h2.mb-4, h3.mb-4, span.mb-4, section.mb-4, article.mb-4, main.mb-4 { margin-bottom: 1rem !important; }
+div.mb-5, p.mb-5, h1.mb-5, h2.mb-5, h3.mb-5, span.mb-5, section.mb-5, article.mb-5, main.mb-5 { margin-bottom: 1.25rem !important; }
+div.mb-6, p.mb-6, h1.mb-6, h2.mb-6, h3.mb-6, span.mb-6, section.mb-6, article.mb-6, main.mb-6 { margin-bottom: 1.5rem !important; }
+
+/* Catch-all for any element with mb- classes */
+.mb-2 { margin-bottom: 0.5rem !important; }
+.mb-3 { margin-bottom: 0.75rem !important; }
+.mb-4 { margin-bottom: 1rem !important; }
+.mb-5 { margin-bottom: 1.25rem !important; }
+.mb-6 { margin-bottom: 1.5rem !important; }
+
+/* Fix p-5 and other padding classes not working */
+.p-1 { padding: 0.25rem !important; }
+.p-2 { padding: 0.5rem !important; }
+.p-3 { padding: 0.75rem !important; }
+.p-5 { padding: 1.25rem !important; }
+.p-7 { padding: 1.75rem !important; }
+
+/* Responsive padding fixes */
+@media (min-width: 640px) {
+  .sm\:p-5 { padding: 1.25rem !important; }
+  .sm\:p-7 { padding: 1.75rem !important; }
+}
+
+/* Icon container specific padding */
+.icon-container-lg { padding: 1.25rem !important; } /* p-5 equivalent */
+.icon-container-xl { padding: 1.75rem !important; } /* p-7 equivalent */
+
+/* Margin top utilities */
+.mt-3 { margin-top: 0.75rem !important; }
+.mt-4 { margin-top: 1rem !important; }
+.mt-5 { margin-top: 1.25rem !important; }
+.mt-6 { margin-top: 1.5rem !important; }
+
+/* Login form specific spacing */
+.login-form-spacing {
+  gap: 1.5rem; /* 24px between elements */
+}
+
+.login-input-group {
+  margin-bottom: 1.5rem;
+}
+
+.login-button-group {
+  margin-top: 2rem;
+}
+
+/* Audio preview spacing - increased */
+.audio-preview {
+  margin: 1.5rem 0 !important;
+}
+
+/* Playlist header spacing */
+.playlist-header {
+  margin-bottom: 1rem !important;
+}
+
+/* Quiz button spacing */
+.quiz-nav-buttons {
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* Button cursor states */
+.cursor-pointer { cursor: pointer !important; }
+.cursor-not-allowed { cursor: not-allowed !important; }
+.disabled\:cursor-not-allowed:disabled { cursor: not-allowed !important; }
+
+/* Button hover states */
+.hover\:cursor-pointer:hover { cursor: pointer !important; }
+.group:hover .group-hover\:cursor-pointer { cursor: pointer !important; }
+
+/* Mood tag padding - enhanced */
+.mood-tag {
+  padding: 0.375rem 0.75rem !important; /* py-1.5 px-3 equivalent */
+  font-size: 0.75rem !important; /* text-xs */
+  font-weight: 500 !important; /* font-medium */
+  border-radius: 9999px !important; /* rounded-full */
+}
+
+/* Logout button styling */
+.logout-button {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logout-button:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+@media (min-width: 640px) {
+  .sm\:mb-12 { margin-bottom: 3rem !important; }
+  .sm\:mb-16 { margin-bottom: 4rem !important; }
+  .sm\:my-16 { margin-top: 4rem !important; margin-bottom: 4rem !important; }
+}
+
+@media (min-width: 768px) {
+  .md\:mb-16 { margin-bottom: 4rem !important; }
+  .md\:mb-20 { margin-bottom: 5rem !important; }
+  .md\:my-20 { margin-top: 5rem !important; margin-bottom: 5rem !important; }
+}
+
+/* Optimized UX/UI spacing - following 8px grid system */
+.section-spacing {
+  margin-bottom: 2rem; /* 32px */
+}
+
+@media (min-width: 640px) {
+  .section-spacing {
+    margin-bottom: 2.5rem; /* 40px */
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-spacing {
+    margin-bottom: 3rem; /* 48px */
+  }
+}
+
+/* Header section - minimal spacing */
+.header-section {
+  margin-bottom: 1rem; /* 16px */
+}
+
+@media (min-width: 640px) {
+  .header-section {
+    margin-bottom: 1.5rem; /* 24px */
+  }
+}
+
+@media (min-width: 1024px) {
+  .header-section {
+    margin-bottom: 2rem; /* 32px */
+  }
+}
+
+/* Content section - no extra margins */
+.content-section {
+  /* No margins - let content flow naturally */
+}
+
+/* Quiz spacing - optimal for readability */
+.quiz-question {
+  margin-bottom: 1.5rem; /* 24px - good readability gap */
+}
+
+.quiz-options {
+  margin-top: 1rem; /* 16px - connected but distinct */
+}
+
+/* Radio button spacing */
+.quiz-radio {
+  margin-right: 1rem !important; /* 16px - comfortable touch target */
+}
+
+/* Enhanced card spacing - balanced */
+.card-spacing {
+  margin-bottom: 1.5rem; /* 24px */
+}
+
+@media (min-width: 640px) {
+  .card-spacing {
+    margin-bottom: 2rem; /* 32px */
+  }
+}
+
+/* Elegant shadows and depth */
+.shadow-elegant {
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1), 0 10px 20px -5px rgba(0, 0, 0, 0.05);
+}
+
+.shadow-floating {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* Smooth transitions */
+.transition-elegant {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.transition-smooth {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.transition-gentle {
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Gradient backgrounds */
+.bg-gradient-warm {
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+}
+
+.bg-gradient-dreamy {
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+}
+
+.bg-gradient-magical {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 50%, #4facfe 100%);
+}
+
+/* Simple cursor pointer for all interactive elements */
+button, 
+a, 
+.cursor-pointer,
+[role="button"],
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+.clickable,
+.game-cursor {
+  cursor: pointer !important;
+}
+
+/* Disabled state cursor */
+button:disabled,
+input:disabled,
+.disabled {
+  cursor: not-allowed !important;
+}
+
+/* Default body cursor */
+body {
+  cursor: default;
+}
+
+/* 
+  Performance Fix: 
+  Disable backdrop-blur globally because placing blurred elements 
+  over animated background blobs/particles causes severe rendering lag.
+*/
+.backdrop-blur-sm {
+  backdrop-filter: none !important;
+}

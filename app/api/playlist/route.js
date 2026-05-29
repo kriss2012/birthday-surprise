@@ -1,0 +1,46 @@
+// app/api/playlist/route.js
+import { NextResponse } from 'next/server'
+
+// Fallback playlist used when Spotify credentials are not configured.
+// Replace SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, and SPOTIFY_PLAYLIST_ID
+// in your .env.local to load the real playlist from Spotify.
+const FALLBACK_PLAYLIST = {
+  name: 'Our Special Playlist',
+  description: 'Songs that remind me of you',
+  image: null,
+  tracks: [
+    { id: 1, title: 'Dilaw', artist: 'Maki', album: 'Dilaw', duration: '3:12', reason: 'This amazing Filipino song reminds me of the golden moments we share together. Your smile lights up my world just like this melody.', spotify_url: 'https://open.spotify.com/track/2ADSh3Mp744n2586tpUtIW', preview_url: 'https://p.scdn.co/mp3-preview/6c6207cea32368c94e5ca1bbec7f86aeff1d3846?cid=3f398ac31e9548e993b18b641d8667e0', gradient: 'from-yellow-400 to-orange-500', mood: 'Uplifting' },
+    { id: 2, title: 'Off My Face', artist: 'Justin Bieber', album: 'Justice', duration: '2:36', reason: 'This song captures how I feel when I\'m with you — completely lost in happiness. You make me feel like I\'m floating on air.', spotify_url: 'https://open.spotify.com/track/3T03rPwlL8NVk1yIaxeD8U', preview_url: 'https://p.scdn.co/mp3-preview/84a0f4fc43b14b81b0a4c37e9d8fbc3fc5b6a90b?cid=3f398ac31e9548e993b18b641d8667e0', gradient: 'from-purple-400 to-pink-500', mood: 'Romantic' },
+    { id: 3, title: 'With You', artist: 'Chris Brown', album: 'Exclusive', duration: '4:12', reason: 'Every time I hear this song, I imagine us dancing together. It perfectly describes how I want to spend every moment with you.', spotify_url: 'https://open.spotify.com/track/5Lgcn7u07bHuqbOtXkN62u', preview_url: 'https://p.scdn.co/mp3-preview/cd33a11a2a045dcb58969e49e9b976ed30c1bad8?cid=3f398ac31e9548e993b18b641d8667e0', gradient: 'from-blue-400 to-indigo-500', mood: 'Romantic' },
+    { id: 4, title: 'Enchanted (Taylor\'s Version)', artist: 'Taylor Swift', album: 'Speak Now (Taylor\'s Version)', duration: '5:53', reason: 'This song tells the story of our first meeting — I was enchanted to meet you, and that magic never fades.', spotify_url: 'https://open.spotify.com/track/3sW3oSbzsfecv9XoUdGs7h', preview_url: null, gradient: 'from-purple-400 to-indigo-600', mood: 'Dreamy' },
+    { id: 5, title: 'Beautiful In White', artist: 'Shane Filan', album: 'Love Always', duration: '3:52', reason: 'This song makes me dream of our future together. I can picture you in white, and my heart fills with so much hope and joy.', spotify_url: 'https://open.spotify.com/track/43wROOsAEK0F3Fu46Vjn7W', preview_url: null, gradient: 'from-red-400 to-pink-500', mood: 'Romantic' },
+  ]
+}
+
+export async function GET() {
+  const clientId = process.env.SPOTIFY_CLIENT_ID
+  const clientSecret = process.env.SPOTIFY_CLIENT_SECRET
+  const playlistId = process.env.SPOTIFY_PLAYLIST_ID
+
+  // If credentials aren't set, return the fallback playlist with a 200
+  // so the client doesn't need to show an error.
+  if (!clientId || !clientSecret || !playlistId || playlistId === 'your_playlist_id_here') {
+    return NextResponse.json(FALLBACK_PLAYLIST)
+  }
+
+  try {
+    const { getPlaylistData } = await import('../../../lib/spotify')
+    const playlistData = await getPlaylistData()
+
+    if (!playlistData) {
+      return NextResponse.json(FALLBACK_PLAYLIST)
+    }
+
+    return NextResponse.json(playlistData)
+  } catch (error) {
+    console.error('Spotify API error:', error)
+    return NextResponse.json(FALLBACK_PLAYLIST)
+  }
+}
+
+// No force-dynamic needed — this can be cached in production
