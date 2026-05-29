@@ -289,32 +289,29 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start; /* Fix for overflow cutoff */
   min-height: 100vh;
   width: 100%;
   margin-left: auto;
   margin-right: auto;
+  padding: 2rem 0; /* Add padding so it doesn't touch the edges when scrolling */
 }
 
 .center-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   width: 100%;
   max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto; /* This centers the content perfectly and allows scrolling when it overflows */
   padding-left: 1rem;
   padding-right: 1rem;
-  padding-top: 0.5rem;
 }
 
 @media (min-width: 640px) {
   .center-content {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
-    padding-top: 0.75rem;
   }
 }
 
@@ -322,7 +319,6 @@ body {
   .center-content {
     padding-left: 2rem;
     padding-right: 2rem;
-    padding-top:1rem;
   }
 }
 
