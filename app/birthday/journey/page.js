@@ -26,16 +26,24 @@ export default function JourneyPage() {
     if (!isAuthenticated) router.replace('/')
   }, [isAuthenticated, router])
 
+  // Configure your trip details here
+  const JOURNEY_CONFIG = {
+    departureLocation: 'Hometown',
+    arrivalLocation: 'Dream Destination',
+    departureDate: '2025-06-15T08:30:00+08:00', // Update with real departure date
+    returnDate: '2025-06-30T23:15:00+08:00', // Update with real return date
+    arrivalDate: '2025-06-15T20:30:00+10:00', // Update with real arrival date
+    departureCoords: { lat: 14.5995, lon: 120.9842 }, // Example: Manila
+    arrivalCoords: { lat: -37.8136, lon: 144.9631 } // Example: Melbourne
+  }
+
   // Countdown to departure and time together
   useEffect(() => {
     const calculateCountdowns = () => {
       const now = new Date()
       
-      // Departure: June 15, 2025, 8:30 AM Manila time (UTC+8)
-      const departure = new Date('2025-06-15T08:30:00+08:00')
-      
-      // Return: June 30, 2025, 11:15 PM Manila time (UTC+8)
-      const returnFlight = new Date('2025-06-30T23:15:00+08:00')
+      const departure = new Date(JOURNEY_CONFIG.departureDate)
+      const returnFlight = new Date(JOURNEY_CONFIG.returnDate)
       
       // Time until departure
       const diffToDeparture = departure - now
@@ -52,8 +60,7 @@ export default function JourneyPage() {
         setCountdown("Until our next adventure...")
       }
       
-      // Time together (15 days)
-      const arrival = new Date('2025-06-15T20:30:00+10:00') // Melbourne time
+      const arrival = new Date(JOURNEY_CONFIG.arrivalDate)
       const timeTogetherMs = returnFlight - arrival
       const daysTogether = Math.floor(timeTogetherMs / (1000 * 60 * 60 * 24))
       
@@ -293,31 +300,31 @@ export default function JourneyPage() {
         }
         
         // Add city markers as children of earth so they rotate together
-        const manilaPos = latLonToVector3(14.5995, 120.9842, 5.1)
-        const melbournePos = latLonToVector3(-37.8136, 144.9631, 5.1)
+        const departurePos = latLonToVector3(JOURNEY_CONFIG.departureCoords.lat, JOURNEY_CONFIG.departureCoords.lon, 5.1)
+        const arrivalPos = latLonToVector3(JOURNEY_CONFIG.arrivalCoords.lat, JOURNEY_CONFIG.arrivalCoords.lon, 5.1)
         
-        // Manila marker
-        const manilaMarker = new THREE.Mesh(
+        // Departure marker
+        const departureMarker = new THREE.Mesh(
           new THREE.SphereGeometry(0.1, 16, 16),
           new THREE.MeshBasicMaterial({ color: 0xff4444 })
         )
-        manilaMarker.position.copy(manilaPos)
-        earth.add(manilaMarker) // Add to earth instead of scene
+        departureMarker.position.copy(departurePos)
+        earth.add(departureMarker) // Add to earth instead of scene
         
-        // Melbourne marker  
-        const melbourneMarker = new THREE.Mesh(
+        // Arrival marker  
+        const arrivalMarker = new THREE.Mesh(
           new THREE.SphereGeometry(0.1, 16, 16),
           new THREE.MeshBasicMaterial({ color: 0x44ff88 })
         )
-        melbourneMarker.position.copy(melbournePos)
-        earth.add(melbourneMarker) // Add to earth instead of scene
+        arrivalMarker.position.copy(arrivalPos)
+        earth.add(arrivalMarker) // Add to earth instead of scene
         
         // Create flight path as child of earth so it rotates together
         const midPoint = new THREE.Vector3()
-        midPoint.addVectors(manilaPos, melbournePos).multiplyScalar(0.5)
+        midPoint.addVectors(departurePos, arrivalPos).multiplyScalar(0.5)
         midPoint.normalize().multiplyScalar(7) // Higher arc over the Pacific
         
-        const curve = new THREE.QuadraticBezierCurve3(manilaPos, midPoint, melbournePos)
+        const curve = new THREE.QuadraticBezierCurve3(departurePos, midPoint, arrivalPos)
         const points = curve.getPoints(100)
         const pathGeometry = new THREE.BufferGeometry().setFromPoints(points)
         const pathMaterial = new THREE.LineBasicMaterial({ 
@@ -388,7 +395,7 @@ export default function JourneyPage() {
         })
         
         // Store references
-        sceneRef.current = { scene, camera, renderer, earth, flightPath, manilaMarker, melbourneMarker }
+        sceneRef.current = { scene, camera, renderer, earth, flightPath, departureMarker, arrivalMarker }
         rendererRef.current = renderer
         
         // Animation loop
@@ -403,8 +410,8 @@ export default function JourneyPage() {
           
           // Animate markers
           const time = Date.now() * 0.001
-          manilaMarker.scale.setScalar(1 + Math.sin(time * 2) * 0.1)
-          melbourneMarker.scale.setScalar(1 + Math.sin(time * 2 + Math.PI) * 0.1)
+          departureMarker.scale.setScalar(1 + Math.sin(time * 2) * 0.1)
+          arrivalMarker.scale.setScalar(1 + Math.sin(time * 2 + Math.PI) * 0.1)
           
           // Render the scene
           renderer.render(scene, camera)
@@ -544,7 +551,7 @@ export default function JourneyPage() {
               <div className={`w-full ${isDarkMode ? 'bg-gray-600' : 'bg-indigo-200'} rounded-full h-2 mb-2`}>
                 <div className="bg-gradient-to-r from-blue-500 to-indigo-600 h-2 rounded-full animate-journey-progress"></div>
               </div>
-              <p className={`text-xs ${isDarkMode ? 'text-indigo-400' : 'text-indigo-500'}`}>Loading flight path: Manila → Melbourne</p>
+              <p className={`text-xs ${isDarkMode ? 'text-indigo-400' : 'text-indigo-500'}`}>Loading flight path: {JOURNEY_CONFIG.departureLocation} → {JOURNEY_CONFIG.arrivalLocation}</p>
             </div>
           </div>
         </div>
