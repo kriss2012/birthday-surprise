@@ -41,29 +41,29 @@ export default function JourneyPage() {
   useEffect(() => {
     const calculateCountdowns = () => {
       const now = new Date()
-      
+
       const departure = new Date(JOURNEY_CONFIG.departureDate)
       const returnFlight = new Date(JOURNEY_CONFIG.returnDate)
-      
+
       // Time until departure
       const diffToDeparture = departure - now
-      
+
       if (diffToDeparture > 0) {
         const days = Math.floor(diffToDeparture / (1000 * 60 * 60 * 24))
         const hours = Math.floor((diffToDeparture % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
         const minutes = Math.floor((diffToDeparture % (1000 * 60 * 60)) / (1000 * 60))
-        
+
         setCountdown(`${days} ${days === 1 ? 'day' : 'days'}, ${hours} ${hours === 1 ? 'hour' : 'hours'}, ${minutes} ${minutes === 1 ? 'minute' : 'minutes'}`)
       } else if (now < returnFlight) {
         setCountdown("We're together! ✈️💕")
       } else {
         setCountdown("Until our next adventure...")
       }
-      
+
       const arrival = new Date(JOURNEY_CONFIG.arrivalDate)
       const timeTogetherMs = returnFlight - arrival
       const daysTogether = Math.floor(timeTogetherMs / (1000 * 60 * 60 * 24))
-      
+
       if (now < departure) {
         setTogetherCountdown(`${daysTogether} ${daysTogether === 1 ? 'day' : 'days'} together waiting for us!`)
       } else if (now >= departure && now < returnFlight) {
@@ -91,11 +91,11 @@ export default function JourneyPage() {
         // Create scene
         const scene = new THREE.Scene()
         scene.background = new THREE.Color(0x000011)
-        
+
         // Create camera
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
         camera.position.set(0, 0, 10)
-        
+
         // Create renderer
         const renderer = new THREE.WebGLRenderer({
           canvas: canvasRef.current,
@@ -104,17 +104,17 @@ export default function JourneyPage() {
         })
         renderer.setSize(window.innerWidth * 0.8, window.innerHeight * 0.6)
         renderer.setPixelRatio(window.devicePixelRatio)
-        
+
         // Create Earth sphere with realistic texture
         const earthGeometry = new THREE.SphereGeometry(5, 64, 32)
-        
+
         // Create fallback Earth texture
         const createFallbackTexture = () => {
           const canvas = document.createElement('canvas')
           canvas.width = 2048
           canvas.height = 1024
           const ctx = canvas.getContext('2d')
-          
+
           // Create realistic ocean gradient
           const oceanGradient = ctx.createLinearGradient(0, 0, 0, canvas.height)
           oceanGradient.addColorStop(0, '#4682B4')    // Steel blue at poles
@@ -122,10 +122,10 @@ export default function JourneyPage() {
           oceanGradient.addColorStop(0.5, '#0066CC')  // Deep ocean blue
           oceanGradient.addColorStop(0.8, '#1E90FF')  // Dodger blue
           oceanGradient.addColorStop(1, '#4682B4')    // Steel blue at poles
-          
+
           ctx.fillStyle = oceanGradient
           ctx.fillRect(0, 0, canvas.width, canvas.height)
-          
+
           // Draw recognizable continents
           const drawContinent = (points, color) => {
             ctx.fillStyle = color
@@ -137,87 +137,87 @@ export default function JourneyPage() {
             ctx.closePath()
             ctx.fill()
           }
-          
+
           // North America
           drawContinent([
-            [300, 150], [500, 100], [650, 150], [700, 250], [680, 350], 
+            [300, 150], [500, 100], [650, 150], [700, 250], [680, 350],
             [600, 400], [500, 420], [400, 400], [350, 350], [300, 250]
           ], '#228B22')
-          
+
           // South America
           drawContinent([
-            [500, 450], [580, 420], [620, 500], [640, 600], [620, 750], 
+            [500, 450], [580, 420], [620, 500], [640, 600], [620, 750],
             [580, 820], [520, 850], [480, 800], [470, 700], [480, 550]
           ], '#32CD32')
-          
+
           // Europe
           drawContinent([
             [950, 180], [1100, 150], [1150, 200], [1120, 280], [1050, 300], [950, 250]
           ], '#90EE90')
-          
+
           // Africa
           drawContinent([
-            [950, 300], [1100, 320], [1150, 380], [1180, 500], [1160, 650], 
-            [1120, 750], [1080, 800], [1020, 780], [980, 700], [960, 600], 
+            [950, 300], [1100, 320], [1150, 380], [1180, 500], [1160, 650],
+            [1120, 750], [1080, 800], [1020, 780], [980, 700], [960, 600],
             [950, 450], [940, 350]
           ], '#228B22')
-          
+
           // Asia
           drawContinent([
-            [1150, 100], [1600, 80], [1800, 150], [1850, 250], [1800, 350], 
+            [1150, 100], [1600, 80], [1800, 150], [1850, 250], [1800, 350],
             [1700, 400], [1500, 420], [1300, 400], [1150, 300], [1120, 200]
           ], '#32CD32')
-          
+
           // Australia
           drawContinent([
             [1600, 650], [1750, 630], [1800, 680], [1780, 750], [1720, 780], [1650, 760]
           ], '#90EE90')
-          
+
           // Greenland
           drawContinent([
             [700, 50], [800, 60], [820, 150], [780, 200], [720, 180], [700, 100]
           ], '#F0F8FF')
-          
+
           // Philippines (highlighted)
           ctx.fillStyle = '#FFD700'
           ctx.beginPath()
           ctx.arc(1620, 350, 15, 0, 2 * Math.PI)
           ctx.fill()
-          
+
           // Major islands
           ctx.fillStyle = '#228B22'
           ctx.fillRect(1150, 550, 30, 80) // Madagascar
           ctx.fillRect(1750, 250, 25, 60) // Japan
           ctx.fillRect(950, 170, 20, 25)  // UK
           ctx.fillRect(1850, 750, 25, 40) // New Zealand
-          
+
           // Ice caps
           ctx.fillStyle = '#F0F8FF'
           ctx.fillRect(0, 0, canvas.width, 50) // Arctic
           ctx.fillRect(0, canvas.height - 60, canvas.width, 60) // Antarctic
-          
+
           return new THREE.CanvasTexture(canvas)
         }
-        
+
         // Create material and try to load real Earth texture
         const earthMaterial = new THREE.MeshPhongMaterial({
           shininess: 10,
           specular: 0x111111,
           transparent: false
         })
-        
+
         // Create texture loader
         const textureLoader = new THREE.TextureLoader()
-        
+
         // Try multiple Earth texture sources
         const earthTextureSources = [
           'https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg',
           'https://cdn.jsdelivr.net/gh/mrdoob/three.js@dev/examples/textures/planets/earth_atmos_2048.jpg',
           'https://threejs.org/examples/textures/planets/earth_atmos_2048.jpg'
         ]
-        
+
         let textureLoaded = false
-        
+
         const tryLoadTexture = (index = 0) => {
           if (index >= earthTextureSources.length || textureLoaded) {
             // Use fallback if all sources fail
@@ -228,7 +228,7 @@ export default function JourneyPage() {
             }
             return
           }
-          
+
           textureLoader.load(
             earthTextureSources[index],
             (texture) => {
@@ -245,18 +245,18 @@ export default function JourneyPage() {
             }
           )
         }
-        
+
         // Start trying to load textures
         tryLoadTexture()
-        
+
         const earth = new THREE.Mesh(earthGeometry, earthMaterial)
         scene.add(earth)
-        
+
         // Add starfield background
         const createStars = () => {
           const starsGeometry = new THREE.BufferGeometry()
           const starPositions = []
-          
+
           for (let i = 0; i < 5000; i++) {
             const radius = 100
             const x = (Math.random() - 0.5) * radius
@@ -264,45 +264,45 @@ export default function JourneyPage() {
             const z = (Math.random() - 0.5) * radius
             starPositions.push(x, y, z)
           }
-          
+
           starsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starPositions, 3))
-          
+
           const starsMaterial = new THREE.PointsMaterial({
             color: 0xffffff,
             size: 2,
             sizeAttenuation: false
           })
-          
+
           return new THREE.Points(starsGeometry, starsMaterial)
         }
-        
+
         const stars = createStars()
         scene.add(stars)
-        
+
         // Add lighting
         const ambientLight = new THREE.AmbientLight(0x404040, 0.4)
         scene.add(ambientLight)
-        
+
         const directionalLight = new THREE.DirectionalLight(0xffffff, 1.0)
         directionalLight.position.set(10, 5, 10)
         scene.add(directionalLight)
-        
+
         // Convert lat/lon to 3D coordinates
         const latLonToVector3 = (lat, lon, radius) => {
           const phi = (90 - lat) * (Math.PI / 180)
           const theta = (lon + 180) * (Math.PI / 180)
-          
+
           return new THREE.Vector3(
             -((radius) * Math.sin(phi) * Math.cos(theta)),
             (radius) * Math.cos(phi),
             (radius) * Math.sin(phi) * Math.sin(theta)
           )
         }
-        
+
         // Add city markers as children of earth so they rotate together
         const departurePos = latLonToVector3(JOURNEY_CONFIG.departureCoords.lat, JOURNEY_CONFIG.departureCoords.lon, 5.1)
         const arrivalPos = latLonToVector3(JOURNEY_CONFIG.arrivalCoords.lat, JOURNEY_CONFIG.arrivalCoords.lon, 5.1)
-        
+
         // Departure marker
         const departureMarker = new THREE.Mesh(
           new THREE.SphereGeometry(0.1, 16, 16),
@@ -310,7 +310,7 @@ export default function JourneyPage() {
         )
         departureMarker.position.copy(departurePos)
         earth.add(departureMarker) // Add to earth instead of scene
-        
+
         // Arrival marker  
         const arrivalMarker = new THREE.Mesh(
           new THREE.SphereGeometry(0.1, 16, 16),
@@ -318,119 +318,119 @@ export default function JourneyPage() {
         )
         arrivalMarker.position.copy(arrivalPos)
         earth.add(arrivalMarker) // Add to earth instead of scene
-        
+
         // Create flight path as child of earth so it rotates together
         const midPoint = new THREE.Vector3()
         midPoint.addVectors(departurePos, arrivalPos).multiplyScalar(0.5)
         midPoint.normalize().multiplyScalar(7) // Higher arc over the Pacific
-        
+
         const curve = new THREE.QuadraticBezierCurve3(departurePos, midPoint, arrivalPos)
         const points = curve.getPoints(100)
         const pathGeometry = new THREE.BufferGeometry().setFromPoints(points)
-        const pathMaterial = new THREE.LineBasicMaterial({ 
-          color: 0xffd700, 
+        const pathMaterial = new THREE.LineBasicMaterial({
+          color: 0xffd700,
           linewidth: 5,
           transparent: true,
           opacity: 1.0
         })
-        
+
         const flightPath = new THREE.Line(pathGeometry, pathMaterial)
         earth.add(flightPath) // Add to earth instead of scene
-        
+
         // Store all references for updating during rotation
-        
+
         // Interactive controls
         let isDragging = false
         let previousMouse = { x: 0, y: 0 }
-        
+
         const handleMouseDown = (event) => {
           isDragging = true
           previousMouse = { x: event.clientX, y: event.clientY }
         }
-        
+
         const handleMouseMove = (event) => {
           if (!isDragging) return
-          
+
           const deltaX = event.clientX - previousMouse.x
           const deltaY = event.clientY - previousMouse.y
-          
+
           earth.rotation.y += deltaX * 0.005
           earth.rotation.x += deltaY * 0.005
-          
+
           // Constrain x rotation
-          earth.rotation.x = Math.max(-Math.PI/2, Math.min(Math.PI/2, earth.rotation.x))
-          
+          earth.rotation.x = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, earth.rotation.x))
+
           // Markers and flight path will rotate with the earth automatically since they're children
-          
+
           previousMouse = { x: event.clientX, y: event.clientY }
         }
-        
+
         const handleMouseUp = () => {
           isDragging = false
         }
-        
+
         // Add event listeners
         const canvas = canvasRef.current
         canvas.addEventListener('mousedown', handleMouseDown)
-        canvas.addEventListener('mousemove', handleMouseMove) 
+        canvas.addEventListener('mousemove', handleMouseMove)
         canvas.addEventListener('mouseup', handleMouseUp)
         canvas.addEventListener('mouseleave', handleMouseUp)
-        
+
         // Touch events for mobile
         canvas.addEventListener('touchstart', (e) => {
           e.preventDefault()
           const touch = e.touches[0]
           handleMouseDown({ clientX: touch.clientX, clientY: touch.clientY })
         })
-        
+
         canvas.addEventListener('touchmove', (e) => {
           e.preventDefault()
           const touch = e.touches[0]
           handleMouseMove({ clientX: touch.clientX, clientY: touch.clientY })
         })
-        
+
         canvas.addEventListener('touchend', (e) => {
           e.preventDefault()
           handleMouseUp()
         })
-        
+
         // Store references
         sceneRef.current = { scene, camera, renderer, earth, flightPath, departureMarker, arrivalMarker }
         rendererRef.current = renderer
-        
+
         // Animation loop
         const animate = () => {
           animationFrameRef.current = requestAnimationFrame(animate)
-          
+
           // Gentle auto-rotation when not being dragged
           if (!isDragging) {
             earth.rotation.y += 0.002
             // Markers and flight path rotate automatically with earth
           }
-          
+
           // Animate markers
           const time = Date.now() * 0.001
           departureMarker.scale.setScalar(1 + Math.sin(time * 2) * 0.1)
           arrivalMarker.scale.setScalar(1 + Math.sin(time * 2 + Math.PI) * 0.1)
-          
+
           // Render the scene
           renderer.render(scene, camera)
         }
-        
+
         animate()
-        
+
         // Handle window resize
         const handleResize = () => {
           const width = window.innerWidth * 0.8
           const height = window.innerHeight * 0.6
-          
+
           camera.aspect = width / height
           camera.updateProjectionMatrix()
           renderer.setSize(width, height)
         }
-        
+
         window.addEventListener('resize', handleResize)
-        
+
         // Cleanup function
         return () => {
           window.removeEventListener('resize', handleResize)
@@ -444,7 +444,7 @@ export default function JourneyPage() {
             canvas.removeEventListener('touchend', handleMouseUp)
           }
         }
-        
+
       } catch (error) {
         console.error('Error initializing globe:', error)
         // Show fallback message if Three.js fails to load
@@ -463,7 +463,7 @@ export default function JourneyPage() {
     }
 
     initGlobe()
-    
+
     return () => {
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current)
@@ -496,7 +496,7 @@ export default function JourneyPage() {
           <div className="absolute top-1/2 right-[35%] text-purple-300 opacity-45 animate-journey-float-6">
             ⭐
           </div>
-          
+
           {/* Additional travel elements */}
           <div className="absolute top-16 right-[10%] text-blue-400 opacity-55 animate-travel-float">
             <Globe size={32} />
@@ -546,7 +546,7 @@ export default function JourneyPage() {
                 Mapping the path to your heart across the globe...
               </p>
             </div>
-            
+
             <div className={`${isDarkMode ? 'bg-gray-800/90' : 'bg-white/90'} backdrop-blur-sm rounded-2xl px-8 py-6 shadow-lg`}>
               <div className={`w-full ${isDarkMode ? 'bg-gray-600' : 'bg-indigo-200'} rounded-full h-2 mb-2`}>
                 <div className="bg-gradient-to-r from-blue-500 to-indigo-600 h-2 rounded-full animate-journey-progress"></div>
@@ -555,7 +555,7 @@ export default function JourneyPage() {
             </div>
           </div>
         </div>
-        
+
         <style jsx>{`
           @keyframes journey-float-1 { 
             0%, 100% { transform: translate(0px, 0px) rotate(0deg); } 
@@ -672,8 +672,8 @@ export default function JourneyPage() {
       {/* Main Content */}
       <div className="center-content relative z-10">
         <div className="header-section">
-          <Link 
-            href="/birthday" 
+          <Link
+            href="/birthday"
             className={`inline-flex items-center ${isDarkMode ? 'text-indigo-400 hover:text-indigo-300 hover:bg-gray-800/50' : 'text-indigo-600 hover:text-indigo-800 hover:bg-indigo-50'} transition-colors px-4 py-3 rounded-xl font-medium`}
           >
             <ArrowLeft size={20} className="mr-3" />
@@ -687,7 +687,7 @@ export default function JourneyPage() {
             <Plane className="text-blue-500 w-8 h-8" />
             <Heart className="text-yellow-500 w-10 h-10 ml-3" fill="currentColor" />
           </div>
-          
+
           <h1 className="text-4xl sm:text-5xl font-bold mb-4">
             <span className="bg-gradient-to-r from-indigo-600 via-blue-600 to-purple-600 bg-clip-text text-transparent">
               Journey to You
@@ -710,7 +710,7 @@ export default function JourneyPage() {
                 Philippine Airlines PR 123 • June 15, 2025 • 8:30 AM
               </div>
             </div>
-            
+
             <div className={`${isDarkMode ? 'bg-pink-900/30 border-pink-700' : 'bg-pink-50 border-pink-100'} rounded-2xl p-6 text-center`}>
               <Heart className="w-8 h-8 text-yellow-500 mx-auto mb-3" fill="currentColor" />
               <h3 className={`text-lg font-bold ${isDarkMode ? 'text-gray-200' : 'text-gray-800'} mb-2`}>Time Together</h3>
@@ -728,7 +728,7 @@ export default function JourneyPage() {
               Flight Details
               <Plane className="w-6 h-6 text-pink-500 transform rotate-180" />
             </h3>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Outbound */}
               <div className={`${isDarkMode ? 'bg-gray-700/80' : 'bg-white/80'} rounded-xl p-4 border-l-4 border-indigo-500`}>
@@ -743,7 +743,7 @@ export default function JourneyPage() {
                   <div className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>🛬 8:30 PM - Melbourne Tullamarine T1</div>
                 </div>
               </div>
-              
+
               {/* Return */}
               <div className={`${isDarkMode ? 'bg-gray-700/80' : 'bg-white/80'} rounded-xl p-4 border-l-4 border-pink-500`}>
                 <div className="flex items-center mb-3">
@@ -766,15 +766,15 @@ export default function JourneyPage() {
           <h3 className={`text-2xl font-bold text-center ${isDarkMode ? 'text-gray-200' : 'text-gray-800'} mb-6`}>
             Our Flight Path Across The World 🌏
           </h3>
-          
+
           <div className="flex justify-center">
-            <canvas 
+            <canvas
               ref={canvasRef}
               className="rounded-2xl shadow-lg max-w-full h-auto"
               style={{ maxHeight: '60vh' }}
             />
           </div>
-          
+
           {/* Interactive Instructions */}
           <div className={`mt-4 ${isDarkMode ? 'bg-indigo-900/30' : 'bg-indigo-50'} rounded-xl p-4 text-center`}>
             <div className={`text-sm ${isDarkMode ? 'text-indigo-300' : 'text-indigo-700'} font-medium mb-2`}>
@@ -784,7 +784,7 @@ export default function JourneyPage() {
               Red marker: Manila 🇵🇭 • Green marker: Melbourne 🇦🇺 • Golden line: Your flight path ✈️
             </div>
           </div>
-          
+
           <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
             <div className={`${isDarkMode ? 'bg-red-900/30' : 'bg-red-50'} rounded-xl p-4`}>
               <MapPin className="w-6 h-6 text-red-500 mx-auto mb-2" />
@@ -813,7 +813,7 @@ export default function JourneyPage() {
       </div>
 
       {/* Hidden Easter Egg */}
-      <EasterEgg 
+      <EasterEgg
         id="egg-6"
         top="30%"
         right="15%"
@@ -823,3 +823,4 @@ export default function JourneyPage() {
     </div>
   )
 }
+// Made By Krishna Patil
