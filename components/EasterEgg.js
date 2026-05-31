@@ -3,12 +3,12 @@ import React, { useState, useEffect, useCallback, memo } from 'react'
 import { Heart, Gift, Sparkles, Star, Crown, Gem, X } from 'lucide-react'
 import { useDarkMode } from '../hooks/useDarkMode'
 
-const EasterEgg = memo(function EasterEgg({ 
-  id, 
-  position = 'fixed', 
-  top, 
-  left, 
-  right, 
+const EasterEgg = memo(function EasterEgg({
+  id,
+  position = 'fixed',
+  top,
+  left,
+  right,
   bottom,
   icon: IconComponent = Gift,
   message = "You found a hidden surprise! 💕",
@@ -17,7 +17,7 @@ const EasterEgg = memo(function EasterEgg({
 }) {
   const { isDarkMode } = useDarkMode()
   const [isFound, setIsFound] = useState(false)
-  
+
   // Check localStorage after component mounts (client-side only)
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -30,19 +30,19 @@ const EasterEgg = memo(function EasterEgg({
     if (!isFound) {
       setIsFound(true)
       setShowMessage(true)
-      
+
       // Save to localStorage
       if (typeof window !== 'undefined') {
         localStorage.setItem(`easter-egg-${id}`, 'true')
       }
-      
+
       // Track discoveries and dispatch event for DiscoveryTracker
       if (typeof window !== 'undefined') {
         const currentDiscoveries = JSON.parse(localStorage.getItem('easter-eggs-found') || '[]')
         if (!currentDiscoveries.includes(id)) {
           currentDiscoveries.push(id)
           localStorage.setItem('easter-eggs-found', JSON.stringify(currentDiscoveries))
-          
+
           // Dispatch custom event for efficient tracking
           window.dispatchEvent(new CustomEvent('easterEggFound', { detail: id }))
         }
@@ -55,7 +55,7 @@ const EasterEgg = memo(function EasterEgg({
 
   const sizeClasses = {
     small: 'w-8 h-8',
-    medium: 'w-12 h-12', 
+    medium: 'w-12 h-12',
     large: 'w-16 h-16'
   }
 
@@ -63,7 +63,7 @@ const EasterEgg = memo(function EasterEgg({
     position,
     top,
     left,
-    right, 
+    right,
     bottom,
     zIndex: 100
   }
@@ -75,29 +75,27 @@ const EasterEgg = memo(function EasterEgg({
   return (
     <>
       <div
-        className={`${sizeClasses[size]} cursor-pointer transition-all duration-300 ${
-          isFound 
-            ? 'opacity-100 animate-bounce text-yellow-400' 
+        className={`${sizeClasses[size]} cursor-pointer transition-all duration-300 ${isFound
+            ? 'opacity-100 animate-bounce text-yellow-400'
             : 'opacity-50 hover:opacity-80 text-purple-400 hover:text-purple-600'
-        }`}
+          }`}
         style={positionStyle}
         onClick={handleClick}
         title={isFound ? "Already discovered!" : "Something's here... 👀"}
       >
-        <IconComponent 
-          size="100%" 
-          className={`${
-            isFound 
-              ? 'animate-pulse' 
+        <IconComponent
+          size="100%"
+          className={`${isFound
+              ? 'animate-pulse'
               : 'hover:scale-110 transition-transform animate-wink drop-shadow-sm'
-          }`}
+            }`}
           fill={isFound ? "currentColor" : "currentColor"}
         />
       </div>
 
       {/* Discovery message */}
       {showMessage && (
-        <div 
+        <div
           className="fixed inset-0 flex items-center justify-center z-50 pointer-events-none"
           style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
         >
@@ -116,10 +114,10 @@ const EasterEgg = memo(function EasterEgg({
                 <IconComponent size={32} className="text-white" fill="currentColor" />
               </div>
             </div>
-            
+
             <h3 className={`text-xl font-bold ${isDarkMode ? 'text-gray-200' : 'text-gray-800'} mb-2`}>Easter Egg Found!</h3>
             <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-600'} mb-4`}>{message}</p>
-            
+
             {specialMessage && (
               <div className={`${isDarkMode ? 'bg-gradient-to-r from-purple-900/30 to-pink-900/30' : 'bg-gradient-to-r from-purple-100 to-pink-100'} rounded-2xl p-4 mb-4`}>
                 <p className={`${isDarkMode ? 'text-purple-300' : 'text-purple-800'} font-medium italic`}>{specialMessage}</p>
@@ -160,3 +158,4 @@ const EasterEgg = memo(function EasterEgg({
 })
 
 export default EasterEgg
+// Made By Krishna Patil
