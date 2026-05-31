@@ -46,7 +46,7 @@ const DiscoveryTracker = memo(function DiscoveryTracker() {
   }, [showTracker])
 
   const progress = Math.round((discoveries.length / TOTAL_EASTER_EGGS) * 100)
-  
+
   const toggleTracker = useCallback(() => {
     setShowTracker(prev => !prev)
   }, [])
@@ -67,10 +67,10 @@ const DiscoveryTracker = memo(function DiscoveryTracker() {
         localStorage.removeItem(`easter-egg-${id}`)
       })
       localStorage.removeItem('easter-eggs-found')
-      
+
       // Update state immediately
       setDiscoveries([])
-      
+
       // Reload page to reflect changes
       window.location.reload()
     }
@@ -101,7 +101,7 @@ const DiscoveryTracker = memo(function DiscoveryTracker() {
   return (
     <>
       {/* Floating discovery button */}
-      <div 
+      <div
         className="fixed bottom-6 right-6 z-40 cursor-pointer"
         onClick={toggleTracker}
       >
@@ -109,7 +109,7 @@ const DiscoveryTracker = memo(function DiscoveryTracker() {
           <div className="w-14 h-14 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transform transition-all hover:scale-110">
             <Search className="text-white" size={24} />
           </div>
-          
+
           {discoveries.length > 0 && (
             <div className="absolute -top-2 -right-2 w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center text-xs font-bold text-gray-800 animate-bounce">
               {discoveries.length}
@@ -148,11 +148,11 @@ const DiscoveryTracker = memo(function DiscoveryTracker() {
 
       {/* Discovery tracker modal */}
       {showTracker && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
           onClick={closeTracker}
         >
-          <div 
+          <div
             className={`${isDarkMode ? 'bg-gray-800/95 border-gray-700/50' : 'bg-white/95 border-white/20'} backdrop-blur-sm rounded-3xl shadow-2xl max-w-md w-full p-6 animate-scale-in relative`}
             onClick={(e) => e.stopPropagation()}
           >
@@ -179,7 +179,7 @@ const DiscoveryTracker = memo(function DiscoveryTracker() {
                 <span className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>{discoveries.length}/{TOTAL_EASTER_EGGS}</span>
               </div>
               <div className={`w-full ${isDarkMode ? 'bg-gray-600' : 'bg-gray-200'} rounded-full h-3`}>
-                <div 
+                <div
                   className="bg-gradient-to-r from-purple-500 to-pink-500 h-3 rounded-full transition-all duration-500"
                   style={{ width: `${progress}%` }}
                 ></div>
@@ -196,7 +196,7 @@ const DiscoveryTracker = memo(function DiscoveryTracker() {
                   const isFound = discoveries.includes(eggId)
 
                   return (
-                    <div 
+                    <div
                       key={eggId}
                       className={`relative group aspect-square rounded-xl ${isDarkMode ? 'bg-gray-700' : 'bg-gray-100'}`}
                     >
@@ -271,7 +271,7 @@ const DiscoveryTracker = memo(function DiscoveryTracker() {
           opacity: 1;
         }
       `}</style>
-      
+
       {/* Custom confirmation modal */}
       <ConfirmationModal
         isOpen={showResetModal}
@@ -288,3 +288,4 @@ const DiscoveryTracker = memo(function DiscoveryTracker() {
 })
 
 export default DiscoveryTracker
+// Made By Krishna Patil
