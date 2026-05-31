@@ -87,7 +87,7 @@ export default function MessagesPage() {
           <div className="absolute top-1/2 right-[35%] text-purple-300 opacity-40 animate-love-float-6">
             ✨
           </div>
-          
+
           {/* Additional romantic elements */}
           <div className="absolute top-16 right-[10%] text-pink-400 opacity-50 animate-romantic-float">
             <Heart size={32} fill="currentColor" />
@@ -133,7 +133,7 @@ export default function MessagesPage() {
               <p className={`${isDarkMode ? 'text-red-400' : 'text-red-600'} text-lg animate-gentle-pulse mb-4`}>
                 Preparing heartfelt messages for you...
               </p>
-              
+
               {/* Animated love dots */}
               <div className="flex justify-center items-center gap-3">
                 <span className="text-2xl animate-love-icon-1">💕</span>
@@ -446,12 +446,12 @@ export default function MessagesPage() {
             <div className="w-28 h-20 mx-auto bg-gradient-to-br from-purple-400 to-pink-500 rounded-lg shadow-xl relative animate-envelope-bounce">
               {/* Envelope flap */}
               <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-14 border-r-14 border-b-10 border-transparent border-b-purple-300"></div>
-              
+
               {/* Envelope body */}
               <div className={`absolute inset-2 ${isDarkMode ? 'bg-gray-800' : 'bg-white'} rounded flex items-center justify-center`}>
                 <MessageCircle className="w-8 h-8 text-purple-500 animate-pulse" />
               </div>
-              
+
               {/* Love letter hearts */}
               <div className="absolute top-1 left-1/2 transform -translate-x-1/2">
                 <div className="flex space-x-1">
@@ -460,7 +460,7 @@ export default function MessagesPage() {
                   <Heart size={8} className="text-pink-300" fill="currentColor" />
                 </div>
               </div>
-              
+
               {/* Flying hearts */}
               <div className="absolute -top-6 -right-4 text-pink-400 animate-heart-fly">
                 <Heart size={14} fill="currentColor" />
@@ -541,8 +541,8 @@ export default function MessagesPage() {
     return (
       <div className={`min-h-screen ${isDarkMode ? 'bg-gradient-to-br from-gray-900 via-purple-900 to-indigo-900' : 'bg-gradient-to-br from-purple-100 via-pink-50 to-blue-100'}`}>
         <div className="container mx-auto px-4 py-8">
-          <Link 
-            href="/birthday" 
+          <Link
+            href="/birthday"
             className={`inline-flex items-center ${isDarkMode ? 'text-purple-400 hover:text-purple-300 hover:bg-purple-900/20' : 'text-purple-600 hover:text-purple-800 hover:bg-purple-50'} transition-colors px-4 py-3 rounded-xl font-medium mb-6`}
           >
             <ArrowLeft size={20} className="mr-2" />
@@ -579,14 +579,14 @@ export default function MessagesPage() {
       <div className="center-content relative z-10">
         {/* Header */}
         <div className="header-section">
-          <Link 
-            href="/birthday" 
+          <Link
+            href="/birthday"
             className={`inline-flex items-center ${isDarkMode ? 'text-purple-400 hover:text-purple-300 hover:bg-gray-800/50' : 'text-purple-600 hover:text-purple-800 hover:bg-purple-50'} transition-colors px-4 py-3 rounded-xl font-medium`}
           >
             <ArrowLeft size={20} className="mr-3" />
             Back to Birthday Hub
           </Link>
-          
+
           <div className="text-center">
             <div className="inline-flex items-center justify-center mb-4">
               <MessageCircle className="text-purple-500 w-8 h-8 mr-3" />
@@ -619,11 +619,10 @@ export default function MessagesPage() {
                 <button
                   key={index}
                   onClick={() => setCurrentMessage(index)}
-                  className={`w-3 h-3 rounded-full transition-all ${
-                    index === currentMessage 
-                      ? 'bg-purple-500 w-8' 
+                  className={`w-3 h-3 rounded-full transition-all ${index === currentMessage
+                      ? 'bg-purple-500 w-8'
                       : 'bg-purple-200 hover:bg-purple-300'
-                  }`}
+                    }`}
                 />
               ))}
             </div>
@@ -661,7 +660,7 @@ export default function MessagesPage() {
                 'from-teal-400 to-blue-600'
               ]
               const gradient = gradients[index % gradients.length]
-              
+
               return (
                 <div
                   key={msg.id}
@@ -691,7 +690,7 @@ export default function MessagesPage() {
                     {msg.video_url && (() => {
                       const videoInfo = getVideoEmbedInfo(msg.video_url)
                       if (!videoInfo) return null
-                      
+
                       return (
                         <div className="mt-6">
                           <div className={`rounded-xl overflow-hidden shadow-lg ${isDarkMode ? 'bg-gray-700/50' : 'bg-gray-50'} p-2`}>
@@ -715,8 +714,8 @@ export default function MessagesPage() {
                                 title="Google Drive video"
                               />
                             ) : (
-                              <video 
-                                controls 
+                              <video
+                                controls
                                 className="w-full max-w-md mx-auto rounded-lg"
                                 style={{ maxHeight: '300px' }}
                                 preload="metadata"
@@ -749,7 +748,7 @@ export default function MessagesPage() {
               ]
               const currentGradient = gradients[currentMessage % gradients.length]
               const currentMsg = messages[currentMessage]
-              
+
               return (
                 <div className={`${isDarkMode ? 'bg-gray-800/90' : 'bg-white/90'} backdrop-blur-sm rounded-xl shadow-2xl overflow-hidden animate-fade-in`}>
                   <div className={`h-2 bg-gradient-to-r ${currentGradient}`}></div>
@@ -769,11 +768,11 @@ export default function MessagesPage() {
                         </p>
                       </div>
                     </div>
-                <p className={`text-base sm:text-lg md:text-xl leading-relaxed mb-8 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>{currentMsg.message}</p>
+                    <p className={`text-base sm:text-lg md:text-xl leading-relaxed mb-8 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>{currentMsg.message}</p>
                     {currentMsg.video_url && (() => {
                       const videoInfo = getVideoEmbedInfo(currentMsg.video_url)
                       if (!videoInfo) return null
-                      
+
                       return (
                         <div className="mb-8">
                           <div className={`rounded-xl overflow-hidden shadow-lg ${isDarkMode ? 'bg-gray-700/50' : 'bg-gray-50'} p-3`}>
@@ -797,8 +796,8 @@ export default function MessagesPage() {
                                 title="Google Drive video"
                               />
                             ) : (
-                              <video 
-                                controls 
+                              <video
+                                controls
                                 className="w-full max-w-lg mx-auto rounded-lg"
                                 style={{ maxHeight: '400px' }}
                                 preload="metadata"
@@ -829,8 +828,7 @@ export default function MessagesPage() {
         )}
 
         {/* Footer */}
-        <div className={`text-center mt-12 mb-8 backdrop-blur-sm rounded-3xl shadow-elegant p-6 max-w-2xl mx-auto ${
-    isDarkMode ? 'bg-gray-800/90 border border-gray-700' : 'bg-white/95 border border-white/20'}`}>
+        <div className={`text-center mt-12 mb-8 backdrop-blur-sm rounded-3xl shadow-elegant p-6 max-w-2xl mx-auto ${isDarkMode ? 'bg-gray-800/90 border border-gray-700' : 'bg-white/95 border border-white/20'}`}>
           <Heart className="text-yellow-500 mx-auto mb-3 w-8 h-8" fill="currentColor" />
           <p className={`${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
             Every word written with love, every message crafted for you
@@ -861,3 +859,4 @@ export default function MessagesPage() {
     </div>
   )
 }
+// Made By Krishna Patil
