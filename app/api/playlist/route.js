@@ -1,6 +1,8 @@
 // app/api/playlist/route.js
 import { NextResponse } from 'next/server'
 
+export const dynamic = 'force-static'
+
 // Fallback playlist used when Spotify credentials are not configured.
 // Replace SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, and SPOTIFY_PLAYLIST_ID
 // in your .env.local to load the real playlist from Spotify.

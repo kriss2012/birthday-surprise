@@ -1,7 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
 
-export const dynamic = 'force-dynamic'
 import { useRouter } from 'next/navigation'
 import { supabase } from '../lib/supabase'
 import { Heart, Lock, Calendar, Sparkles, Star } from 'lucide-react'
