@@ -9,7 +9,7 @@ import { DarkModeProvider } from '../hooks/useDarkMode'
 // This component is the boundary between the server layout and client world.
 export default function ClientProviders({ children }) {
   const [isMounted, setIsMounted] = useState(false)
-  
+
   useEffect(() => {
     setIsMounted(true)
   }, [])
@@ -27,3 +27,4 @@ export default function ClientProviders({ children }) {
     </DarkModeProvider>
   )
 }
+// Made By Krishna Patil
