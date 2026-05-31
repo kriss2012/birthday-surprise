@@ -133,7 +133,7 @@ export default function MemoriesPage() {
               <p className="text-purple-600 text-lg animate-gentle-pulse mb-4">
                 Preparing your beautiful memories...
               </p>
-              
+
               {/* Animated memory dots */}
               <div className="flex justify-center items-center gap-3">
                 <span className="text-2xl animate-love-icon-1">📸</span>
@@ -418,7 +418,7 @@ export default function MemoriesPage() {
               <div className="absolute inset-2 bg-gradient-to-br from-purple-200 to-pink-200 rounded flex items-center justify-center">
                 <Camera className="w-8 h-8 text-purple-500 animate-pulse" />
               </div>
-              
+
               {/* Loading bars */}
               <div className={`absolute bottom-0 left-0 right-0 h-1 ${isDarkMode ? 'bg-gray-600' : 'bg-gray-200'}`}>
                 <div className="h-full bg-gradient-to-r from-purple-500 to-pink-500 animate-loading-bar"></div>
@@ -508,8 +508,8 @@ export default function MemoriesPage() {
     return (
       <div className={`min-h-screen ${isDarkMode ? 'bg-gradient-to-br from-gray-900 via-purple-900 to-indigo-900' : 'bg-gradient-to-br from-purple-100 via-pink-50 to-blue-100'}`}>
         <div className="container mx-auto px-4 py-8">
-          <Link 
-            href="/birthday" 
+          <Link
+            href="/birthday"
             className={`inline-flex items-center ${isDarkMode ? 'text-purple-400 hover:text-purple-300' : 'text-purple-600 hover:text-purple-800'} transition-colors mb-6`}
           >
             <ArrowLeft size={20} className="mr-2" />
@@ -546,14 +546,14 @@ export default function MemoriesPage() {
       <div className="center-content relative z-10">
         {/* Header */}
         <div className="header-section">
-          <Link 
-            href="/birthday" 
+          <Link
+            href="/birthday"
             className={`inline-flex items-center ${isDarkMode ? 'text-purple-400 hover:text-purple-300 hover:bg-gray-800/50' : 'text-purple-600 hover:text-purple-800 hover:bg-purple-50'} transition-colors px-4 py-3 rounded-xl font-medium`}
           >
             <ArrowLeft size={20} className="mr-3" />
             Back to Birthday Hub
           </Link>
-          
+
           <div className="text-center">
             <div className="inline-flex items-center justify-center mb-4">
               <Camera className="text-purple-500 w-8 h-8 mr-3" />
@@ -576,22 +576,20 @@ export default function MemoriesPage() {
           <div className={`${isDarkMode ? 'bg-gray-800/80' : 'bg-white/80'} backdrop-blur-sm rounded-full p-1 shadow-lg`}>
             <button
               onClick={() => setViewMode('grid')}
-              className={`px-6 py-3 rounded-full transition-all min-h-[44px] ${
-                viewMode === 'grid'
+              className={`px-6 py-3 rounded-full transition-all min-h-[44px] ${viewMode === 'grid'
                   ? 'bg-purple-500 text-white shadow-md'
                   : `${isDarkMode ? 'text-purple-400 hover:bg-gray-700' : 'text-purple-600 hover:bg-purple-100'}`
-              }`}
+                }`}
             >
               <Grid size={18} className="inline mr-2" />
               Grid
             </button>
             <button
               onClick={() => setViewMode('timeline')}
-              className={`px-6 py-3 rounded-full transition-all min-h-[44px] ${
-                viewMode === 'timeline'
+              className={`px-6 py-3 rounded-full transition-all min-h-[44px] ${viewMode === 'timeline'
                   ? 'bg-purple-500 text-white shadow-md'
                   : `${isDarkMode ? 'text-purple-400 hover:bg-gray-700' : 'text-purple-600 hover:bg-purple-100'}`
-              }`}
+                }`}
             >
               <List size={18} className="inline mr-2" />
               Timeline
@@ -614,8 +612,8 @@ export default function MemoriesPage() {
                   {/* Photo placeholder */}
                   <div className="aspect-[4/3] bg-gradient-to-br from-purple-200 to-pink-200 relative overflow-hidden">
                     {memory.photo_url ? (
-                      <img 
-                        src={memory.photo_url} 
+                      <img
+                        src={memory.photo_url}
                         alt={memory.title}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                       />
@@ -626,7 +624,7 @@ export default function MemoriesPage() {
                     )}
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
                   </div>
-                  
+
                   {/* Content */}
                   <div className="p-4 sm:p-6">
                     <div className="flex items-start justify-between mb-3">
@@ -658,34 +656,32 @@ export default function MemoriesPage() {
             <div className="relative">
               {/* Timeline line */}
               <div className="absolute left-1/2 transform -translate-x-0.5 h-full w-1 bg-gradient-to-b from-purple-300 to-pink-300"></div>
-              
+
               {memories.map((memory, index) => (
                 <div
                   key={memory.id}
                   data-memory-id={memory.id}
-                  className={`relative mb-12 transition-all duration-700 transform ${
-                    visibleItems.has(memory.id) 
-                      ? 'translate-y-0 opacity-100' 
+                  className={`relative mb-12 transition-all duration-700 transform ${visibleItems.has(memory.id)
+                      ? 'translate-y-0 opacity-100'
                       : 'translate-y-8 opacity-0'
-                  } ${index % 2 === 0 ? 'text-right pr-8' : 'text-left pl-8'}`}
+                    } ${index % 2 === 0 ? 'text-right pr-8' : 'text-left pl-8'}`}
                   style={{ transitionDelay: `${index * 100}ms` }}
                 >
                   {/* Timeline dot */}
                   <div className={`absolute left-1/2 top-6 transform -translate-x-1/2 w-4 h-4 bg-purple-500 rounded-full border-4 ${isDarkMode ? 'border-gray-800' : 'border-white'} shadow-lg z-10`}></div>
-                  
+
                   {/* Content card */}
-                  <div 
-                    className={`inline-block w-full md:w-2/5 cursor-pointer group ${
-                      index % 2 === 0 ? 'md:ml-0' : 'md:ml-auto'
-                    }`}
+                  <div
+                    className={`inline-block w-full md:w-2/5 cursor-pointer group ${index % 2 === 0 ? 'md:ml-0' : 'md:ml-auto'
+                      }`}
                     onClick={() => setSelectedMemory(memory)}
                   >
                     <div className={`${isDarkMode ? 'bg-gray-800/90' : 'bg-white/90'} backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden group-hover:shadow-2xl transform transition-all duration-300 group-hover:scale-[1.02]`}>
                       {/* Photo */}
                       <div className="aspect-[16/9] bg-gradient-to-br from-purple-200 to-pink-200 relative overflow-hidden">
                         {memory.photo_url ? (
-                          <img 
-                            src={memory.photo_url} 
+                          <img
+                            src={memory.photo_url}
                             alt={memory.title}
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                             loading="lazy"
@@ -696,7 +692,7 @@ export default function MemoriesPage() {
                           </div>
                         )}
                       </div>
-                      
+
                       {/* Content */}
                       <div className="p-4 sm:p-6 text-left">
                         <div className="flex items-center justify-between mb-3">
@@ -740,19 +736,19 @@ export default function MemoriesPage() {
 
       {/* Memory Detail Modal */}
       {selectedMemory && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
           onClick={() => setSelectedMemory(null)}
         >
-          <div 
+          <div
             className={`${isDarkMode ? 'bg-gray-800' : 'bg-white'} rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto animate-scale-in`}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Photo */}
             <div className="aspect-[16/9] bg-gradient-to-br from-purple-200 to-pink-200 relative overflow-hidden rounded-t-3xl">
               {selectedMemory.photo_url ? (
-                <img 
-                  src={selectedMemory.photo_url} 
+                <img
+                  src={selectedMemory.photo_url}
                   alt={selectedMemory.title}
                   className="w-full h-full object-cover"
                 />
@@ -769,7 +765,7 @@ export default function MemoriesPage() {
                 <X size={20} />
               </button>
             </div>
-            
+
             {/* Content */}
             <div className="p-6 sm:p-8">
               <div className="flex items-start justify-between mb-4">
@@ -795,7 +791,7 @@ export default function MemoriesPage() {
       )}
 
       {/* Hidden Easter Eggs */}
-      <EasterEgg 
+      <EasterEgg
         id="egg-4"
         top="25%"
         right="3%"
@@ -805,7 +801,7 @@ export default function MemoriesPage() {
         size="small"
       />
 
-      <EasterEgg 
+      <EasterEgg
         id="egg-5"
         bottom="20%"
         left="10%"
@@ -862,3 +858,4 @@ export default function MemoriesPage() {
     </div>
   )
 }
+// Made By Krishna Patil
