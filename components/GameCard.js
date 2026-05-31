@@ -3,15 +3,15 @@ import React, { memo } from 'react'
 import { Play, Trophy } from 'lucide-react'
 import { useDarkMode } from '../hooks/useDarkMode'
 
-const GameCard = memo(function GameCard({ 
-  game, 
-  index, 
-  onGameSelect, 
-  gameStats 
+const GameCard = memo(function GameCard({
+  game,
+  index,
+  onGameSelect,
+  gameStats
 }) {
   const IconComponent = game.icon
   const { isDarkMode } = useDarkMode()
-  
+
   // Get high score for this game
   const getHighScore = () => {
     switch (game.id) {
@@ -53,7 +53,7 @@ const GameCard = memo(function GameCard({
             <Play className="text-white/70 w-6 h-6" />
           </div>
         </div>
-        
+
         {/* Content */}
         <div className="p-6">
           <h3 className={`text-xl font-bold ${isDarkMode ? 'text-gray-100' : 'text-gray-800'} mb-2 group-hover:text-purple-600 transition-colors`}>
@@ -62,7 +62,7 @@ const GameCard = memo(function GameCard({
           <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-600'} text-sm leading-relaxed mb-4`}>
             {game.description}
           </p>
-          
+
           {/* High Score Display */}
           {highScore > 0 && (
             <div className={`flex items-center justify-between pt-3 border-t ${isDarkMode ? 'border-gray-600' : 'border-gray-200'}`}>
@@ -75,7 +75,7 @@ const GameCard = memo(function GameCard({
               </div>
             </div>
           )}
-          
+
           {highScore === 0 && (
             <div className={`pt-3 border-t ${isDarkMode ? 'border-gray-600' : 'border-gray-200'}`}>
               <div className={`text-xs ${isDarkMode ? 'bg-purple-900/30 text-purple-400' : 'bg-purple-100 text-purple-700'} px-2 py-1 rounded-full inline-flex items-center`}>
@@ -91,3 +91,4 @@ const GameCard = memo(function GameCard({
 })
 
 export default GameCard
+// Made By Krishna Patil
