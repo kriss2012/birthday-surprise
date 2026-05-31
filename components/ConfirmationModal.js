@@ -3,18 +3,18 @@ import React from 'react'
 import { X, AlertTriangle } from 'lucide-react'
 import { useDarkMode } from '../hooks/useDarkMode'
 
-export default function ConfirmationModal({ 
-  isOpen, 
-  onClose, 
-  onConfirm, 
-  title = "Confirm Action", 
+export default function ConfirmationModal({
+  isOpen,
+  onClose,
+  onConfirm,
+  title = "Confirm Action",
   message = "Are you sure you want to proceed?",
   confirmText = "Confirm",
   cancelText = "Cancel",
   variant = "danger" // danger, warning, info
 }) {
   const { isDarkMode } = useDarkMode()
-  
+
   if (!isOpen) return null
 
   const handleBackdropClick = (e) => {
@@ -33,22 +33,22 @@ export default function ConfirmationModal({
       case 'danger':
         return {
           icon: <AlertTriangle className="w-6 h-6 text-red-500" />,
-          confirmButton: isDarkMode 
-            ? 'bg-red-600 hover:bg-red-700 text-white' 
+          confirmButton: isDarkMode
+            ? 'bg-red-600 hover:bg-red-700 text-white'
             : 'bg-red-500 hover:bg-red-600 text-white'
         }
       case 'warning':
         return {
           icon: <AlertTriangle className="w-6 h-6 text-yellow-500" />,
-          confirmButton: isDarkMode 
-            ? 'bg-yellow-600 hover:bg-yellow-700 text-white' 
+          confirmButton: isDarkMode
+            ? 'bg-yellow-600 hover:bg-yellow-700 text-white'
             : 'bg-yellow-500 hover:bg-yellow-600 text-white'
         }
       default:
         return {
           icon: <AlertTriangle className="w-6 h-6 text-blue-500" />,
-          confirmButton: isDarkMode 
-            ? 'bg-blue-600 hover:bg-blue-700 text-white' 
+          confirmButton: isDarkMode
+            ? 'bg-blue-600 hover:bg-blue-700 text-white'
             : 'bg-blue-500 hover:bg-blue-600 text-white'
         }
     }
@@ -57,7 +57,7 @@ export default function ConfirmationModal({
   const variantStyles = getVariantStyles()
 
   return (
-    <div 
+    <div
       className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 px-4"
       onClick={handleBackdropClick}
     >
@@ -71,8 +71,8 @@ export default function ConfirmationModal({
           onClick={onClose}
           className={`
             absolute top-4 right-4 p-2 rounded-full transition-colors z-10
-            ${isDarkMode 
-              ? 'hover:bg-gray-700 text-gray-400 hover:text-gray-200' 
+            ${isDarkMode
+              ? 'hover:bg-gray-700 text-gray-400 hover:text-gray-200'
               : 'hover:bg-gray-100 text-gray-500 hover:text-gray-700'
             }
           `}
@@ -102,8 +102,8 @@ export default function ConfirmationModal({
               onClick={onClose}
               className={`
                 px-4 py-2 rounded-xl font-medium transition-colors
-                ${isDarkMode 
-                  ? 'bg-gray-700 hover:bg-gray-600 text-gray-200' 
+                ${isDarkMode
+                  ? 'bg-gray-700 hover:bg-gray-600 text-gray-200'
                   : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
                 }
               `}
@@ -122,3 +122,4 @@ export default function ConfirmationModal({
     </div>
   )
 }
+// Made By Krishna Patil
