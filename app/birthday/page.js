@@ -34,19 +34,19 @@ export default function BirthdayPage() {
       const now = new Date()
       const currentYear = now.getFullYear()
       let birthday = new Date(`${currentYear}-09-03T00:00:00+10:00`) // Melbourne time
-      
+
       // If birthday has passed this year, use next year
       if (birthday < now) {
         birthday = new Date(`${currentYear + 1}-09-03T00:00:00+10:00`)
       }
-      
+
       const diff = birthday - now
 
       if (diff > 0) {
         const days = Math.floor(diff / (1000 * 60 * 60 * 24))
         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
-        
+
         if (days > 0) {
           setTimeUntil(`${days} ${days === 1 ? 'day' : 'days'} and ${hours} ${hours === 1 ? 'hour' : 'hours'} until your special day!`)
         } else if (hours > 0) {
@@ -147,12 +147,12 @@ export default function BirthdayPage() {
             <div className="w-24 h-24 mx-auto relative">
               <div className={`absolute inset-0 border-4 ${isDarkMode ? 'border-gray-600' : 'border-purple-200'} rounded-full`}></div>
               <div className="absolute inset-0 border-4 border-transparent border-t-purple-500 border-r-pink-500 rounded-full animate-spin"></div>
-              
+
               {/* Inner pulsing circle */}
               <div className="absolute inset-3 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full animate-gentle-pulse flex items-center justify-center">
                 <Heart className="w-8 h-8 text-white animate-gentle-float" fill="currentColor" />
               </div>
-              
+
               {/* Orbiting dots */}
               <div className="absolute inset-0 animate-gentle-spin">
                 <div className="absolute -top-2 left-1/2 w-4 h-4 bg-yellow-400 rounded-full transform -translate-x-1/2 animate-gentle-pulse"></div>
@@ -169,7 +169,7 @@ export default function BirthdayPage() {
               Loading Birthday Magic
             </span>
           </div>
-          
+
           {/* Progress indicator */}
           <div className={`${isDarkMode ? 'bg-gray-800/90' : 'bg-white/90'} backdrop-blur-sm rounded-2xl px-8 py-6 shadow-lg`}>
             <div className="flex items-center justify-center gap-3 mb-3">
@@ -208,7 +208,7 @@ export default function BirthdayPage() {
         <button onClick={handleLogout} className={`fixed top-4 right-4 z-50 ${isDarkMode ? 'bg-gray-800/90 border-gray-700/50 text-gray-300 hover:bg-red-900/20 hover:text-red-400' : 'bg-white/90 border-white/20 text-gray-600 hover:bg-red-50 hover:text-red-600'} backdrop-blur-sm px-4 py-2 rounded-xl text-sm font-medium cursor-pointer transition-all duration-300`}>
           ← Back to Login
         </button>
-        
+
       </div>
 
       <div className="center-content relative z-10">
@@ -219,17 +219,17 @@ export default function BirthdayPage() {
             <Gift className="text-purple-500 mx-3 w-8 h-8 sm:w-10 sm:h-10" />
             <Sparkles className="text-yellow-400 w-6 h-6 sm:w-8 sm:h-8" />
           </div>
-          
+
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 px-2">
             <span className="bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent">
               Happy Birthday!
             </span>
           </h1>
-          
+
           <p className={`text-lg sm:text-xl ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} mb-4 px-2`}>
             Welcome to your special surprise! 💕
           </p>
-          
+
           <div className={`inline-flex items-center gap-2 px-4 py-4 ${isDarkMode ? 'bg-gray-800/80' : 'bg-white/80'} backdrop-blur-sm rounded-full shadow-md`}>
             <Calendar className="text-purple-500 w-4 h-4 sm:w-5 sm:h-5" />
             <p className={`text-xs sm:text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>{timeUntil}</p>
@@ -244,7 +244,7 @@ export default function BirthdayPage() {
               href={feature.link}
               prefetch={false}
               className="group block animate-slide-up-smooth"
-              style={{ 
+              style={{
                 animationDelay: feature.delay,
                 willChange: 'transform, opacity'
               }}
@@ -283,15 +283,15 @@ export default function BirthdayPage() {
             A Special Message For You
           </h2>
           <p className={`text-sm sm:text-base ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} leading-relaxed max-w-2xl mx-auto px-2 sm:px-0`}>
-            Even though we&apos;re miles apart on your special day, my love for you knows no distance. 
-            This little corner of the internet is my way of being there with you, celebrating you, 
-            and reminding you how incredibly special you are. Every pixel here was placed with love, 
+            Even though we&apos;re miles apart on your special day, my love for you knows no distance.
+            This little corner of the internet is my way of being there with you, celebrating you,
+            and reminding you how incredibly special you are. Every pixel here was placed with love,
             every feature built while thinking of your beautiful smile. Happy Birthday! 🎂💛
           </p>
         </div>
 
         {/* Hidden Easter Eggs */}
-        <EasterEgg 
+        <EasterEgg
           id="egg-1"
           top="10%"
           left="5%"
@@ -300,8 +300,8 @@ export default function BirthdayPage() {
           specialMessage="You're the queen of my heart, today and always!"
           size="medium"
         />
-        
-        <EasterEgg 
+
+        <EasterEgg
           id="egg-2"
           bottom="15%"
           right="8%"
@@ -311,7 +311,7 @@ export default function BirthdayPage() {
           size="medium"
         />
 
-        <EasterEgg 
+        <EasterEgg
           id="egg-3"
           top="50%"
           left="2%"
@@ -324,3 +324,4 @@ export default function BirthdayPage() {
     </div>
   )
 }
+// Made By Krishna Patil
