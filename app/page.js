@@ -47,11 +47,11 @@ export default function LandingPage() {
 
       // Set authentication
       sessionStorage.setItem('birthday_authenticated', 'true')
-      
+
       // Show success loading screen for 1.5 seconds
       setIsLoading(false)
       setShowSuccessLoading(true)
-      
+
       setTimeout(() => {
         router.push('/birthday')
       }, 1500)
@@ -74,10 +74,10 @@ export default function LandingPage() {
 
   // Success loading screen
   if (showSuccessLoading) {
-    const backgroundClasses = isDarkMode 
-      ? "bg-gradient-to-br from-gray-900 via-purple-900 to-indigo-900" 
+    const backgroundClasses = isDarkMode
+      ? "bg-gradient-to-br from-gray-900 via-purple-900 to-indigo-900"
       : "bg-gradient-to-br from-pink-100 via-purple-50 to-blue-100"
-    
+
     return (
       <div className={`min-h-screen flex items-center justify-center ${backgroundClasses} overflow-hidden relative`}>
         {/* Celebratory background elements */}
@@ -101,7 +101,7 @@ export default function LandingPage() {
           <div className="absolute top-1/2 right-[35%] text-yellow-300 opacity-35 animate-birthday-float-6">
             🌟
           </div>
-          
+
           {/* Hearts floating around */}
           <div className="absolute top-16 right-[10%] text-pink-400 opacity-50 animate-heart-float-1">
             <Heart size={32} fill="currentColor" />
@@ -142,7 +142,7 @@ export default function LandingPage() {
               <p className={`${isDarkMode ? 'text-purple-400' : 'text-purple-600'} text-lg animate-gentle-pulse mb-4`}>
                 Preparing your magical surprise...
               </p>
-              
+
               {/* Animated celebration dots */}
               <div className="flex justify-center items-center gap-3">
                 <span className="text-2xl animate-celebration-1">🎂</span>
@@ -446,8 +446,8 @@ export default function LandingPage() {
     )
   }
 
-  const backgroundClasses = isDarkMode 
-    ? "bg-gradient-to-br from-gray-900 via-purple-900 to-indigo-900" 
+  const backgroundClasses = isDarkMode
+    ? "bg-gradient-to-br from-gray-900 via-purple-900 to-indigo-900"
     : "bg-gradient-to-br from-pink-100 via-purple-50 to-blue-100"
 
   return (
@@ -538,7 +538,7 @@ export default function LandingPage() {
         </div>
 
         {/* Hidden Easter Egg */}
-        <EasterEgg 
+        <EasterEgg
           id="egg-8"
           top="15%"
           right="10%"
@@ -551,3 +551,4 @@ export default function LandingPage() {
     </div>
   )
 }
+// Made By Krishna Patil
