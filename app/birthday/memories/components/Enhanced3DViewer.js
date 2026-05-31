@@ -25,8 +25,8 @@ export default function Enhanced3DViewer({ memories, onSelectMemory }) {
               <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden border border-white/20 hover:shadow-2xl transition-all duration-300">
                 <div className="aspect-[4/3] bg-gradient-to-br from-purple-200 to-pink-200 relative overflow-hidden">
                   {memory.photo_url ? (
-                    <img 
-                      src={memory.photo_url} 
+                    <img
+                      src={memory.photo_url}
                       alt={memory.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                     />
@@ -36,7 +36,7 @@ export default function Enhanced3DViewer({ memories, onSelectMemory }) {
                     </div>
                   )}
                 </div>
-                
+
                 <div className="p-4">
                   <h3 className="text-sm font-bold text-gray-800 mb-1 truncate">
                     {memory.title}
@@ -54,7 +54,7 @@ export default function Enhanced3DViewer({ memories, onSelectMemory }) {
           ))}
         </div>
       </div>
-      
+
       {/* Status message */}
       <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-2xl px-4 py-2">
         <p className="text-purple-600">Enhanced Gallery: {memories.length} {memories.length === 1 ? 'memory' : 'memories'}</p>
@@ -63,3 +63,4 @@ export default function Enhanced3DViewer({ memories, onSelectMemory }) {
     </div>
   )
 }
+// Made By Krishna Patil
