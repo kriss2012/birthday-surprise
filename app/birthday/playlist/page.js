@@ -146,7 +146,7 @@ export default function PlaylistPage() {
       console.log('Audio ref not ready')
       return
     }
-    
+
     if (currentSong?.id === song.id) {
       // Same song - toggle play/pause
       if (isPlaying) {
@@ -201,7 +201,7 @@ export default function PlaylistPage() {
           <div className="absolute top-1/2 right-[35%] text-indigo-400 opacity-25 animate-musical-float-6">
             ♫
           </div>
-          
+
           {/* Headphones and music icons */}
           <div className="absolute top-16 right-[10%] text-purple-300 opacity-40 animate-gentle-float">
             <Headphones size={28} />
@@ -253,7 +253,7 @@ export default function PlaylistPage() {
             <p className="text-purple-600 animate-gentle-pulse mb-4">
               Preparing the perfect mix for you...
             </p>
-            
+
             {/* Musical loading dots */}
             <div className="flex justify-center items-center gap-2 mb-6">
               <span className="text-purple-500 text-lg animate-musical-note-1">♪</span>
@@ -695,14 +695,14 @@ export default function PlaylistPage() {
       <div className="center-content relative z-10">
         {/* Header */}
         <div className="header-section">
-          <Link 
-            href="/birthday" 
+          <Link
+            href="/birthday"
             className={`inline-flex items-center text-purple-600 hover:text-purple-800 transition-colors px-4 py-3 rounded-xl ${isDarkMode ? 'hover:bg-purple-900/50' : 'hover:bg-purple-50'} font-medium`}
           >
             <ArrowLeft size={20} className="mr-3" />
             Back to Birthday Hub
           </Link>
-          
+
           <div className="text-center content-section">
             <div className="inline-flex items-center justify-center mb-4">
               <Music className="text-purple-500 w-8 h-8 mr-3" />
@@ -717,15 +717,15 @@ export default function PlaylistPage() {
             <p className={`text-base sm:text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} mb-4`}>
               {playlistInfo?.description || "Every melody tells our story, my Looove 🎵"}
             </p>
-            
+
             {/* Preview availability notice */}
             <div className="max-w-2xl mx-auto audio-preview px-2 sm:px-0">
               <div className={`${isDarkMode ? 'bg-blue-900/30 border-blue-700 text-blue-300' : 'bg-blue-50 border-blue-200 text-blue-800'} rounded-lg p-4 text-sm`}>
-                <span className="font-medium">🎵 Audio Previews:</span> Most songs show "No preview" - this is normal with Spotify's free tier. 
+                <span className="font-medium">🎵 Audio Previews:</span> Most songs show "No preview" - this is normal with Spotify's free tier.
                 Click the Spotify links to listen to full songs on Spotify! Songs with previews will play 30-second clips.
               </div>
             </div>
-            
+
             {/* Playlist stats */}
             <div className={`inline-flex items-center gap-6 ${isDarkMode ? 'bg-gray-800/80' : 'bg-white/80'} backdrop-blur-sm rounded-2xl px-6 py-3 shadow-lg`}>
               <div className="flex items-center gap-2">
@@ -811,15 +811,14 @@ export default function PlaylistPage() {
             </h2>
             <p className={`${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Click any song to see why it reminds me of you</p>
           </div>
-          
+
           <div className={`divide-y ${isDarkMode ? 'divide-gray-700' : 'divide-gray-100'}`}>
             {playlist.map((song, index) => (
               <div
                 key={song.id}
                 onClick={() => handleSongClick(song)}
-                className={`p-4 sm:p-6 ${isDarkMode ? 'hover:bg-gray-700/50' : 'hover:bg-purple-50'} transition-all cursor-pointer group ${
-                  currentSong?.id === song.id ? (isDarkMode ? 'bg-gray-700/50 border-l-4 border-purple-400' : 'bg-purple-50 border-l-4 border-purple-500') : ''
-                }`}
+                className={`p-4 sm:p-6 ${isDarkMode ? 'hover:bg-gray-700/50' : 'hover:bg-purple-50'} transition-all cursor-pointer group ${currentSong?.id === song.id ? (isDarkMode ? 'bg-gray-700/50 border-l-4 border-purple-400' : 'bg-purple-50 border-l-4 border-purple-500') : ''
+                  }`}
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
@@ -835,7 +834,7 @@ export default function PlaylistPage() {
                         <Play className="w-5 h-5 text-purple-600 hidden group-hover:block" />
                       )}
                     </div>
-                    
+
                     <div>
                       <h3 className={`font-semibold ${isDarkMode ? 'text-gray-200' : 'text-gray-800'} group-hover:text-purple-600 transition-colors`}>
                         {song.title}
@@ -847,7 +846,7 @@ export default function PlaylistPage() {
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-center gap-4">
                     <span className={`px-4 py-2 rounded-full text-xs font-medium ${getMoodColors(song.mood)}`}>
                       {song.mood}
@@ -862,7 +861,7 @@ export default function PlaylistPage() {
                     </span>
                   </div>
                 </div>
-                
+
                 {currentSong?.id === song.id && (
                   <div className={`mt-4 pt-4 border-t ${isDarkMode ? 'border-gray-600' : 'border-purple-200'} animate-fade-in`}>
                     <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-700'} italic leading-relaxed mb-4`}>
@@ -932,3 +931,4 @@ export default function PlaylistPage() {
     </div>
   )
 }
+// Made By Krishna Patil
