@@ -20,7 +20,7 @@ export function useGameStats() {
       const memoryMatchScore = localStorage.getItem('memoryMatch_bestScore')
       const heartsDistanceScore = localStorage.getItem('heartsDistance_highScore')
       const heartsDistanceTime = localStorage.getItem('heartsDistance_bestTime')
-      
+
       setGameStats({
         quickHearts: quickHeartsScore ? parseInt(quickHeartsScore) : 0,
         memoryMatch: memoryMatchScore ? parseInt(memoryMatchScore) : 0,
@@ -73,3 +73,4 @@ export function useGameStats() {
     heartsDistanceTime: gameStats.heartsDistanceTime
   }
 }
+// Made By Krishna Patil
