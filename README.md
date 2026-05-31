@@ -2,9 +2,15 @@
 
 A personalized, interactive web application for celebrating special occasions. Built with Next.js and featuring 3D games, multimedia experiences, and heartfelt content designed to create memorable moments.
 
+<div align="center">
+  <a href="https://kriss2012.github.io/birthday-surprise/" target="_blank">
+    <img src="https://img.shields.io/badge/Live%20Demo-Click%20Here-pink?style=for-the-badge&logo=vercel" alt="Live Demo" />
+  </a>
+</div>
+
 ## 🔐 Demo Access
 
-**Try it now:** After running the app locally, visit `http://localhost:3000` and use password **`demo123`** to access the experience.
+**Try it now:** Visit the [Live Demo](https://kriss2012.github.io/birthday-surprise/) or run the app locally, visit `http://localhost:3000` and use password **`demo123`** to access the experience.
 
 > **⚠️ Important:** Change this password in `app/page.js` before deploying to production!
 
