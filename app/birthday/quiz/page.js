@@ -99,7 +99,7 @@ export default function QuizPage() {
         correctAnswers++
       }
     })
-    
+
     setScore(correctAnswers)
     setShowResults(true)
 
@@ -162,14 +162,14 @@ export default function QuizPage() {
       <div className="center-content relative z-10">
         {/* Header */}
         <div className="header-section">
-          <Link 
-            href="/birthday" 
+          <Link
+            href="/birthday"
             className={`inline-flex items-center ${isDarkMode ? 'text-purple-400 hover:text-purple-300 hover:bg-purple-900/20' : 'text-purple-600 hover:text-purple-800 hover:bg-purple-50'} transition-colors px-4 py-3 rounded-xl font-medium`}
           >
             <ArrowLeft size={20} className="mr-3" />
             Back to Birthday Hub
           </Link>
-          
+
           <div className="text-center">
             <div className="inline-flex items-center justify-center mb-4">
               <Brain className="text-purple-500 w-8 h-8 mr-3" />
@@ -196,7 +196,7 @@ export default function QuizPage() {
               </div>
               <h2 className={`text-xl sm:text-2xl font-bold ${isDarkMode ? 'text-gray-200' : 'text-gray-800'} mb-4`}>Ready for the Challenge?</h2>
               <p className={`${isDarkMode ? 'text-gray-400' : 'text-gray-600'} mb-6 leading-relaxed`}>
-                I&apos;ve prepared {questions.length} questions about myself. Let&apos;s see how much you&apos;ve been paying attention! 
+                I&apos;ve prepared {questions.length} questions about myself. Let&apos;s see how much you&apos;ve been paying attention!
                 Each question has one correct answer, and I&apos;ll share little secrets about myself along the way.
               </p>
               <div className={`${isDarkMode ? 'bg-purple-900/20' : 'bg-purple-50'} rounded-2xl p-6 mb-8`}>
@@ -232,7 +232,7 @@ export default function QuizPage() {
                 </span>
               </div>
               <div className="w-full bg-purple-200 rounded-full h-2">
-                <div 
+                <div
                   className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full transition-all duration-500"
                   style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
                 ></div>
@@ -250,27 +250,24 @@ export default function QuizPage() {
                   <button
                     key={index}
                     onClick={() => handleAnswerSelect(currentQuestion, index)}
-                    className={`w-full p-4 text-left rounded-2xl border-2 transition-all transform hover:scale-[1.02] ${
-                      selectedAnswers[currentQuestion] === index
+                    className={`w-full p-4 text-left rounded-2xl border-2 transition-all transform hover:scale-[1.02] ${selectedAnswers[currentQuestion] === index
                         ? `border-purple-500 ${isDarkMode ? 'bg-purple-900/20' : 'bg-purple-50'} shadow-lg`
                         : `${isDarkMode ? 'border-gray-600 bg-gray-800/50 hover:border-purple-400 hover:bg-purple-900/10' : 'border-gray-200 bg-white hover:border-purple-300 hover:bg-purple-25'}`
-                    }`}
+                      }`}
                   >
                     <div className="flex items-center">
-                      <div className={`w-6 h-6 rounded-full border-2 quiz-radio flex items-center justify-center flex-shrink-0 ${
-                        selectedAnswers[currentQuestion] === index
+                      <div className={`w-6 h-6 rounded-full border-2 quiz-radio flex items-center justify-center flex-shrink-0 ${selectedAnswers[currentQuestion] === index
                           ? 'border-purple-500 bg-purple-500'
                           : 'border-gray-300'
-                      }`}>
+                        }`}>
                         {selectedAnswers[currentQuestion] === index && (
                           <div className={`w-2 h-2 ${isDarkMode ? 'bg-gray-200' : 'bg-white'} rounded-full`}></div>
                         )}
                       </div>
-                      <span className={`font-medium ml-3 ${
-                        selectedAnswers[currentQuestion] === index
+                      <span className={`font-medium ml-3 ${selectedAnswers[currentQuestion] === index
                           ? 'text-purple-700'
                           : isDarkMode ? 'text-gray-300' : 'text-gray-700'
-                      }`}>
+                        }`}>
                         {option}
                       </span>
                     </div>
@@ -302,23 +299,22 @@ export default function QuizPage() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Score card */}
             <div className={`${isDarkMode ? 'bg-gray-800/95 border-gray-700/50' : 'bg-white/95 border-white/20'} backdrop-blur-sm rounded-3xl shadow-floating p-6 sm:p-8 md:p-10 text-center mb-8 animate-scale-in mx-4 sm:mx-0`}>
-              <Trophy className={`w-16 h-16 mx-auto mb-6 ${
-                score === questions.length ? 'text-yellow-500' : 
-                score >= questions.length * 0.8 ? 'text-blue-500' : 
-                score >= questions.length * 0.6 ? 'text-green-500' : 'text-purple-500'
-              }`} />
-              
+              <Trophy className={`w-16 h-16 mx-auto mb-6 ${score === questions.length ? 'text-yellow-500' :
+                  score >= questions.length * 0.8 ? 'text-blue-500' :
+                    score >= questions.length * 0.6 ? 'text-green-500' : 'text-purple-500'
+                }`} />
+
               <h2 className={`text-2xl sm:text-3xl font-bold ${isDarkMode ? 'text-gray-200' : 'text-gray-800'} mb-4`}>Quiz Complete! 🎉</h2>
-              
+
               <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-2xl p-6 mb-6">
                 <div className="text-4xl font-bold mb-2">{score}/{questions.length}</div>
                 <div className="text-lg opacity-90">
                   {Math.round((score / questions.length) * 100)}% Correct
                 </div>
               </div>
-              
+
               <p className="text-lg sm:text-xl text-gray-700 mb-6 sm:mb-8">{getScoreMessage()}</p>
-              
+
               <button
                 onClick={restartQuiz}
                 className="px-10 py-5 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-2xl shadow-lg hover:shadow-xl transform transition-all hover:-translate-y-1 min-h-[56px] cursor-pointer"
@@ -331,22 +327,21 @@ export default function QuizPage() {
             {/* Answer explanations */}
             <div className="space-y-6 mx-4 sm:mx-0">
               <h3 className={`text-2xl font-bold text-center ${isDarkMode ? 'text-gray-200' : 'text-gray-800'} mb-8`}>Let me explain my answers! 💭</h3>
-              
+
               {questions.map((question, index) => (
                 <div key={question.id} className={`${isDarkMode ? 'bg-gray-800/90' : 'bg-white/90'} backdrop-blur-sm rounded-2xl shadow-xl p-6 mb-6 animate-fade-in`}>
                   <div className="flex items-start gap-4">
-                    <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
-                      selectedAnswers[index] === question.correct
+                    <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${selectedAnswers[index] === question.correct
                         ? 'bg-green-500 text-white'
                         : 'bg-red-500 text-white'
-                    }`}>
+                      }`}>
                       {selectedAnswers[index] === question.correct ? (
                         <CheckCircle size={20} />
                       ) : (
                         <XCircle size={20} />
                       )}
                     </div>
-                    
+
                     <div className="flex-1 pl-2">
                       <h4 className={`font-bold ${isDarkMode ? 'text-gray-200' : 'text-gray-800'} mb-4`}>{question.question}</h4>
                       <div className="mb-4 space-y-2">
@@ -406,3 +401,4 @@ export default function QuizPage() {
     </div>
   )
 }
+// Made By Krishna Patil
