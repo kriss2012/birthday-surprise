@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@react-three/drei": "^9.88.0",
-    "@react-three/fiber": "^8.15.0",
+    "@react-three/fiber": "^9.7.0",
     "@supabase/ssr": "^0.7.0",
     "@supabase/supabase-js": "^2.56.0",
     "framer-motion": "^12.23.12",
