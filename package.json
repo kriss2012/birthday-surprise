@@ -33,6 +33,6 @@
     "eslint-config-next": "15.5.0",
     "gh-pages": "^6.3.0",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^7"
   }
 }
