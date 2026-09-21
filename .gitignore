@@ -41,3 +41,11 @@ yarn-error.log*
 next-env.d.ts
 
 .vercel
+
+# Standards & hygiene
+.env.local
+.env.*.local
+*.key
+node_modules/
+dist/
+build/
